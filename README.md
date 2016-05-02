@@ -10,10 +10,10 @@ HTPC Dashboard to load website services, written in PHP
 `` parse_ini_file `` must be allowed in php.ini (default is allowed!)
 - To set it up, clone this repository:
 `` git clone https://github.com/causefx/iDashboard-PHP `` or download the ZIP-file.
-- Place all files on a publically accessible webserver, either directly in the root, or inside a directory called ``Dashboard`` or whatever you want it to be called.
+- Place all files on a publically accessible webserver, either directly in the root, or inside a directory called ``Dashboard`` or whatever you want it to be called.  Please set the correct user permissions on the directory and it's files.
 
 ##INSTRUCTIONS
->Upload all contents of zip or git pull the zip into the folder you want to have this on your webserver.
+>Upload all contents of zip or git pull the zip into the folder you want to have this on your webserver.  Set the correct file permission on the files.
 
 >Open up the index.php file once everything is uploaded.  The script will install and copt the default template over.
 
