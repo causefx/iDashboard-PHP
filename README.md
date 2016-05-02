@@ -1,5 +1,6 @@
 # iDashboard-PHP
 HTPC Dashboard to load website services, written in PHP
+>Default Password is "iCauseFX"
 
 ![Desktop screenshot](http://i.imgur.com/WgR0WNB.jpg)
 
