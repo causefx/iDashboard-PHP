@@ -1,7 +1,7 @@
 ; <?php die("Access denied"); ?>
 [general]
 title = "iCauseFX"
-password = "$5$rounds=10000$eouObTi7kzkrVSUi$SWDzat61s1exrkWhI6DzRnlPI2b6oGHjiLmBM.T/BL0"
+password = "$5$rounds=10000$2lXstBi0yrcJd7vH$9SBM7jW1XAlS67mNpEKolliHvz57UPgPv65nJIBpgI2"
 useicons = "true"
 [Sonarr]
 url = "https://sonarr.tv/"
@@ -21,15 +21,15 @@ icon = "fa-bug"
 enabled = "true"
 guest = "true"
 [Request]
-url = "http://plexrequests.8bits.ca/"
+url = "https://plexrequests.8bits.ca/"
 icon = "fa-search"
 enabled = "true"
 guest = "true"
 [Server]
-url = "http://phpsysinfo.github.io/phpsysinfo/"
+url = "https://phpsysinfo.github.io/phpsysinfo/"
 icon = "fa-database"
 enabled = "true"
 [NZB]
-url = "http://nzbget.net/"
+url = "https://nzbget.net/"
 icon = "fa-cloud-download"
 enabled = "true"

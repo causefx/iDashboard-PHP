@@ -65,7 +65,7 @@ if(!file_exists('settings.ini.php')){
         <script src="js/jquery.min.js"></script>
         <script src="js/tabs.min.js"></script>
         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
+    
     </head>
 
     <body style="position: fixed; top: 0; right: 0; bottom: 0; left: 0;background: url(img/bg.jpg) no-repeat center center fixed; 
@@ -89,6 +89,7 @@ if(!file_exists('settings.ini.php')){
                 </ul>
 
                 <!-- Content container -->
+                <style> .z-container { position: fixed; top: 50px; right: 0px; bottom: 0px; left: 0px; margin: 10px; } </style>
                 <div style="top: <?=$px;?>">              
 
                     <?=$loadedurls;?>
