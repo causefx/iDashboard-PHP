@@ -119,6 +119,8 @@ if(empty($_POST["password-0"])){ $_POST["password-0"] = $nopass;}
 if(strlen($_POST["password-0"]) < 50){ $_POST["password-0"] = crypt($_POST["password-0"], sprintf('$5$rounds=%d$%s$', $rounds, $salt)); }
 //password crap      
 
+$sampleData .= '; <?php die("Access denied"); ?>' . "\r\n";
+    
 foreach ($_POST as $parameter => $value) {
     $splitParameter = explode('-', $parameter);
     if ($value == "on")

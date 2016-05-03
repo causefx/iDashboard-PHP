@@ -1,3 +1,4 @@
+; <?php die("Access denied"); ?>
 [general]
 title = "iCauseFX"
 password = "$5$rounds=10000$eouObTi7kzkrVSUi$SWDzat61s1exrkWhI6DzRnlPI2b6oGHjiLmBM.T/BL0"

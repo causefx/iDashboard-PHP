@@ -10,7 +10,8 @@ foreach ($config as $keyname => $section) {
         
         if(!empty($section["useicons"]) && ($section["useicons"]=="true")){ 
             
-            $icons = "active"; 
+            $icons = "active";
+            if($icons == "active"){ $px = "80px"; }else{ $px = "50px";}
             
             $guesticons = "<span><i class=\"fa fa-toggle-on\"></i></span>";
             $adminicons = "<span><i class=\"fa fa-toggle-on\"></i></span>";
@@ -88,7 +89,7 @@ if(!file_exists('settings.ini.php')){
                 </ul>
 
                 <!-- Content container -->
-                <div>              
+                <div style="top: <?=$px;?>">              
 
                     <?=$loadedurls;?>
                     <?=$lasttaburl;?>
