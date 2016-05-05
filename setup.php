@@ -37,11 +37,6 @@ foreach ($config as $keyname => $section) {
 
 }
 
-/*$salt = substr(str_replace('+','.',base64_encode(md5(mt_rand(), true))),0,16);
-$rounds = 10000;
-$given_hash = crypt($realpass, sprintf('$5$rounds=%d$%s$', $rounds, $salt));
-*/
-
 $pass = isset( $_POST["pass"] ) ? $_POST["pass"] : "none" ;
 
 if(isset( $_POST["pass"] ) && $pass !== "none"){ $error = "Wrong Password!";}
@@ -50,8 +45,7 @@ $parts = explode('$', $hash_pass);
 $test_hash = crypt($pass, sprintf('$%s$%s$%s$', $parts[1], $parts[2], $parts[3]));
 
 if(($hash_pass == $test_hash)){ 
-    setcookie("logged", "Dashboard", time() + (86400 * 7), "/");
-    //echo "<meta http-equiv='refresh' content='0'>";
+        setcookie("logged", $hash_pass, time() + (86400 * 7), "/");
         echo "<!DOCTYPE html>";
         echo "<head>";
         echo "<title>Form submitted</title>";
@@ -73,7 +67,7 @@ if((!isset($_COOKIE["logged"]))){
     
 }else{
     
-        echo "<!DOCTYPE html>";
+    echo "<!DOCTYPE html>";
     echo "<head>";
     echo "<title>Form submitted</title>";
     echo "<script type='text/javascript'>window.location.replace('settings.php');</script>";
