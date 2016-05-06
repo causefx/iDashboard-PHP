@@ -61,7 +61,7 @@ if(array_key_exists('category-0', $_POST) == true){
         echo "<!DOCTYPE html>";
         echo "<head>";
         echo "<title>Form submitted</title>";
-        echo "<script type='text/javascript'>window.location.replace('settings.php');</script>";
+        echo "<script type='text/javascript'>window.parent.location.reload();</script>";
         echo "</head>";
         echo "<body></body></html>";
     }

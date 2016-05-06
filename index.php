@@ -15,6 +15,7 @@ foreach ($config as $keyname => $section) {
             
             $guesticons = "<span><i class=\"fa fa-toggle-on\"></i></span>";
             $adminicons = "<span><i class=\"fa fa-toggle-on\"></i></span>";
+            $refreshicons = "<span><i class=\"fa fa-refresh\"></i></span>";
         }
     
         //Guest

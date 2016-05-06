@@ -33,26 +33,29 @@ try {
 
 foreach ($config as $keyname => $section) {
     
-        if(($keyname == "general")) { $hash_pass = $section["password"]; }
+    if(($keyname == "general")) { $hash_pass = $section["password"]; }
 
 }
 
 $pass = isset( $_POST["pass"] ) ? $_POST["pass"] : "none" ;
 
-if(isset( $_POST["pass"] ) && $pass !== "none"){ $error = "Wrong Password!";}
-
 $parts = explode('$', $hash_pass);
 $test_hash = crypt($pass, sprintf('$%s$%s$%s$', $parts[1], $parts[2], $parts[3]));
 
 if(($hash_pass == $test_hash)){ 
-        setcookie("logged", $hash_pass, time() + (86400 * 7), "/");
-        echo "<!DOCTYPE html>";
-        echo "<head>";
-        echo "<title>Form submitted</title>";
-        echo "<script type='text/javascript'>window.parent.location.reload()</script>";
-        echo "</head>";
-        echo "<body></body></html>";
-} 
+    setcookie("logged", $hash_pass, time() + (86400 * 7), "/");
+    $error = "You got it dude!";
+    echo "<!DOCTYPE html>";
+    echo "<head>";
+    echo "<title>Form submitted</title>";
+    echo "<script type='text/javascript'>window.parent.location.reload()</script>";
+    echo "</head>";
+    echo "<body></body></html>";
+}
+
+if(isset( $_POST["pass"] ) && ($hash_pass !== $test_hash)){
+    $error = "Wrong Password!";
+}
     
 if((!isset($_COOKIE["logged"]))){
 
