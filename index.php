@@ -21,14 +21,14 @@ foreach ($config as $keyname => $section) {
         //Guest
         if(!isset($_COOKIE["logged"]) && !empty($section["enabled"]) && ($section["enabled"]=="true") && !empty($section["guest"]) && ($section["guest"]=="true") ) {
             if($icons == "active"){ $listicons = "<span><i class=\"fa ". $section["icon"] ."\"></i></span>"; }
-            $loadedlist .= "<li><a>" . $keyname . " " . $listicons ."</a></li>\n";
+            $loadedlist .= "<li id=\"". $section["url"] ."x\"><a>" . $keyname . " " . $listicons ."</a></li>\n";
             $loadedurls .= "<div class=\"z-nopadding\" data-content-url=\"". $section["url"] ."\" data-content-type=\"iframe\"></div>\n";
                             
         }
         //Full Access
         if(isset($_COOKIE["logged"]) && !empty($section["enabled"]) && ($section["enabled"]=="true")) {
             if($icons == "active"){ $listicons = "<span><i class=\"fa ". $section["icon"] ."\"></i></span>"; }
-            $loadedlist .= "<li><a>" . $keyname . " " . $listicons ."</a></li>\n";
+            $loadedlist .= "<li id=\"". $section["url"] ."x\"><a>" . $keyname . " " . $listicons ."</a></li>\n";
             $loadedurls .= "<div class=\"z-nopadding\" data-content-url=\"". $section["url"] ."\" data-content-type=\"iframe\"></div>\n";
             
         }
@@ -66,6 +66,17 @@ if(!file_exists('settings.ini.php')){
         <script src="js/jquery.min.js"></script>
         <script src="js/tabs.min.js"></script>
         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+        <script>
+
+            $(document).ready(function(){
+                $("li").dblclick(function(){
+                    var frame = this.id.slice(0, -1);
+                    var f = document.getElementById(frame);
+                    f.src = f.src;
+                });
+            });
+
+</script>
     
     </head>
 
