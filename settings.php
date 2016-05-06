@@ -14,7 +14,6 @@ if(isset($_GET["action"])){$action = $_GET["action"];}
 
 function write_ini_file($content, $path) { 
 
-
     if (!$handle = fopen($path, 'w')) { 
         return false; 
     }
@@ -42,8 +41,6 @@ if(array_key_exists('category-0', $_POST) == true){
     $rounds = 10000;
     if(empty($_POST["password-0"])){ $_POST["password-0"] = $nopass;}
     if(strlen($_POST["password-0"]) < 50){ $_POST["password-0"] = crypt($_POST["password-0"], sprintf('$5$rounds=%d$%s$', $rounds, $salt)); }
-    setcookie("test1", "test", time() + (86400 * 1), "/");
-    setcookie("test2", $_POST["password-0"], time() + (86400 * 7), "/");
     //password crap      
 
     //Gather Config Write Info
@@ -148,19 +145,19 @@ if(array_key_exists('category-0', $_POST) == true){
     <body> 
 
         <form action="?action=write" method="post" name="adminForm" class="form-inline">
-            <?foreach ($config as $keyname => $section) {
-                setcookie("test3", "test", time() + (86400 * 1), "/");
-                setcookie("test4", $_POST["password-0"], time() + (86400 * 7), "/");
+            <?
+            foreach ($config as $keyname => $section) {
                 if(($keyname == "general")) {
-                    echo '<div class="form-group clearfix">';
-                    echo '<input type="hidden" name="category-0" class="form-control" value="general">';
-                    echo '<span class="btn btn-inactive " type="button"><span class="fa fa-cog"></span></span> ';
-                    echo '<input type="text" name="title-0" class="form-control" value="'. $section["title"] .'"> ';
-                    echo '<input type="text" name="password-0" class="form-control" placeholder="Leave Blank if no change" value=""> ';
-                    if($section['useicons'] == "true"){echo '<input type="checkbox" name="useicons-0" id="useicons-0" class="css-checkbox" checked> ';}else {echo '<input type="checkbox" name="useicons-0" id="useicons-0" class="css-checkbox"> ';}
-                    echo '<label for="useicons-0" class="css-label">Icons</label></div><br/><hr/><br/> ';
+                    echo "<div class=\"form-group clearfix\">";
+                    echo "<input type=\"hidden\" name=\"category-0\" class=\"form-control\" value=\"general\">";
+                    echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-cog\"></span></span> ";
+                    echo "<input type=\"text\" name=\"title-0\" class=\"form-control\" value=\"" . $section["title"] ."\"> ";
+                    echo "<input type=\"text\" name=\"password-0\" class=\"form-control\" placeholder=\"Leave Blank if no change\" value=\"\"> ";
+                    if($section['useicons'] == "true"){echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\" checked> ";}else {echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\"> ";}
+                    echo "<label for=\"useicons-0\" class=\"css-label\">Icons</label></div><br/><hr/><br/> ";
                 }
-            }?>
+            }
+            ?>
 
             <div id="tagsForm" class="sortable">
 
