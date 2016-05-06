@@ -145,7 +145,7 @@ if(array_key_exists('category-0', $_POST) == true){
     <body> 
 
         <form action="?action=write" method="post" name="adminForm" class="form-inline">
-            <?
+            <?php
             foreach ($config as $keyname => $section) {
                 if(($keyname == "general")) {
                     echo "<div class=\"form-group clearfix\">";
@@ -161,25 +161,31 @@ if(array_key_exists('category-0', $_POST) == true){
 
             <div id="tagsForm" class="sortable">
 
-            <?$i = 0;
+            <?php
+            $i = 0;
             foreach ($config as $keyname => $section) {
 
-                if(($keyname !== "general")) {?>  
+                if(($keyname !== "general")) {
+                    ?>  
 
                     <div class="form-group clearfix">
                         <span class="btn btn-default move" type="button"><span class="fa fa-arrows"></span></span>
                         <input type="text" name="category-<?=$i;?>" class="form-control" value="<?=$keyname;?>">
                         <input type="text" name="url-<?=$i;?>" class="form-control" placeholder="url" value="<?=$section['url']?>">
                         <button data-placement="left" data-cols="5" data-rows="5" class="btn btn-default" name="icon-<?=$i;?>" role="iconpicker" data-iconset="fontawesome" data-icon="<?=$section['icon']?>"></button>
-                        <?if($section['enabled'] == "true"){echo '<input type="checkbox" name="enabled-' . $i .'" id="enabled-' . $keyname . '" class="css-checkbox" checked>';}else {echo '<input type="checkbox" name="enabled-' . $i .'" id="enabled-' . $keyname . '" class="css-checkbox">';}?>      
+                        <?php
+                        if($section['enabled'] == "true"){echo '<input type="checkbox" name="enabled-' . $i .'" id="enabled-' . $keyname . '" class="css-checkbox" checked>';}else {echo '<input type="checkbox" name="enabled-' . $i .'" id="enabled-' . $keyname . '" class="css-checkbox">';}?>      
                         <label for="enabled-<?=$keyname;?>" class="css-label">Enabled</label> 
-                        <?if($section['guest'] == "true"){echo '<input type="checkbox" name="guest-' . $i .'" id="guest-' . $keyname . '" class="css-checkbox" checked>';}else {echo '<input type="checkbox" name="guest-' . $i .'" id="guest-' . $keyname . '" class="css-checkbox">';}?>
+                        <?php
+                        if($section['guest'] == "true"){echo '<input type="checkbox" name="guest-' . $i .'" id="guest-' . $keyname . '" class="css-checkbox" checked>';}else {echo '<input type="checkbox" name="guest-' . $i .'" id="guest-' . $keyname . '" class="css-checkbox">';}?>
                         <label for="guest-<?=$keyname;?>" class="css-label">Guest</label> <button class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
                     </div>
 
-                <?}
+                <?php
+                }
                 $i++;
-            }?>
+            }
+            ?>
 
             </div>
 
