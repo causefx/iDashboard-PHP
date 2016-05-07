@@ -1,10 +1,8 @@
 # iDashboard-PHP
-HTPC Dashboard to load website services, written in PHP
+HTPC Dashboard to load website services, written in PHP [Inspired by: [Managethis](https://github.com/Tenzinn3/Managethis) by [Tenzinn3](https://github.com/Tenzinn3)]
 >Default Password is "iCauseFX"
 
-![Desktop screenshot](http://i.imgur.com/WgR0WNB.jpg)
-
-![Desktop screenshot](http://i.imgur.com/cs3ClvM.jpg)
+![Desktop screenshot](http://i.imgur.com/KKhouUU.png)
 
 ## Setup
 **Requirements:** A webserver (nginx, Apache, IIS or any other webserver) configured with PHP5 support.
@@ -19,16 +17,16 @@ HTPC Dashboard to load website services, written in PHP
 >Open up the index.php file once everything is uploaded.  The script will install and copt the default template over.
 
 >Now you can goto settings and change the tabs to whaever you like in whatever order and change your password.
-![Desktop screenshot](http://i.imgur.com/aFlJ1fX.jpg)
+![Desktop screenshot](http://i.imgur.com/6PNff3U.png)
 
 >Once the cookie expires you will need to login again
-![Desktop screenshot](http://i.imgur.com/N6niCtV.jpg)
+![Desktop screenshot](http://i.imgur.com/2rlNV5h.png)
 
 If you aren't logged in you or any guest will only see your guest enabled tabs
-![Desktop screenshot](http://i.imgur.com/Euo24a0.jpg)
+![Desktop screenshot](http://i.imgur.com/sjwRQpB.png)
 
 
 ##This is just a rough beta...
->Verification is done through cookies which I will add another layer of security by adding hash to the cookie.  Will be done soon.
->I need to fix the settings.php to include php die code so it will not be read from outside the server.
+>Verification is done through cookies and hashed passwords.
+>Still working on mobile portion.
 
