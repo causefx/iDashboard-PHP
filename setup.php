@@ -72,13 +72,14 @@ if($_COOKIE["logged"] == $hash_pass){
 
 if($hash_pass !== $test_hash){
 
+    echo "<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>";
     echo "<center><B>Please Login to Contiune<br/><br/>";
     echo $error . "<br/>";
-    echo "<style> .css-input { padding:8px; border-radius:47px; border-width:3px; border-style:double; font-size:17px; border-color:#0a090a; box-shadow: 2px 6px 8px 0px rgba(42,42,42,.75); font-weight:bold;  } 
-		 .css-input:focus { outline:none; } </style>";
     echo "<form action=\"?action=write\" method='POST'>";
-    echo "<b>Password: </b><input class='css-input' type='password' name='pass'></input>            ";
-    echo "<input class='css-input' type='submit' name='submit' value='Go'></input>";
+    echo "<div class=\"form-group clearfix well well-sm\" style=\"width: 25%; padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
+    echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Password</div>";
+    echo "<input style=\"margin-bottom: 0px\" type=\"password\" name=\"pass\" class=\"form-control\">";
+    echo "<span class=\"input-group-btn\"><button name=\"submit\" class=\"btn btn-success\" type=\"submit\">Go!</button></span></div></div>";
     echo "</form></center>";
     
 }
