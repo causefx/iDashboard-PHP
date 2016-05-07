@@ -5,6 +5,8 @@
 $configfile = 'settings.ini.php';
 $examplefile = 'example.ini.php';
 
+if(isset($_GET["action"])){$action = $_GET["action"];}
+
 if(!file_exists($filename) && !file_exists($examplefile)){
     die('You are missing the ini configuration file, please download and refresh this page');
 }
@@ -42,7 +44,7 @@ $pass = isset( $_POST["pass"] ) ? $_POST["pass"] : "none" ;
 $parts = explode('$', $hash_pass);
 $test_hash = crypt($pass, sprintf('$%s$%s$%s$', $parts[1], $parts[2], $parts[3]));
 
-if(($hash_pass == $test_hash)){ 
+if(($action == "write" && $hash_pass == $test_hash)){ 
     setcookie("logged", $hash_pass, time() + (86400 * 7), "/");
     $error = "You got it dude!";
     echo "<!DOCTYPE html>";
@@ -57,18 +59,7 @@ if(isset( $_POST["pass"] ) && ($hash_pass !== $test_hash)){
     $error = "Wrong Password!";
 }
     
-if((!isset($_COOKIE["logged"]))){
-
-    echo "<center><B>Please Login to Contiune<br/><br/>";
-    echo $error . "<br/>";
-    echo "<style> .css-input { padding:8px; border-radius:47px; border-width:3px; border-style:double; font-size:17px; border-color:#0a090a; box-shadow: 2px 6px 8px 0px rgba(42,42,42,.75); font-weight:bold;  } 
-		 .css-input:focus { outline:none; } </style>";
-    echo "<form method='POST'>";
-    echo "<b>Password: </b><input class='css-input' type='password' name='pass'></input>            ";
-    echo "<input class='css-input' type='submit' name='submit' value='Go'></input>";
-    echo "</form></center>";
-    
-}else{
+if($_COOKIE["logged"] == $hash_pass){
     
     echo "<!DOCTYPE html>";
     echo "<head>";
@@ -76,6 +67,19 @@ if((!isset($_COOKIE["logged"]))){
     echo "<script type='text/javascript'>window.location.replace('settings.php');</script>";
     echo "</head>";
     echo "<body></body></html>";
+    
+}
+
+if($hash_pass !== $test_hash){
+
+    echo "<center><B>Please Login to Contiune<br/><br/>";
+    echo $error . "<br/>";
+    echo "<style> .css-input { padding:8px; border-radius:47px; border-width:3px; border-style:double; font-size:17px; border-color:#0a090a; box-shadow: 2px 6px 8px 0px rgba(42,42,42,.75); font-weight:bold;  } 
+		 .css-input:focus { outline:none; } </style>";
+    echo "<form action=\"?action=write\" method='POST'>";
+    echo "<b>Password: </b><input class='css-input' type='password' name='pass'></input>            ";
+    echo "<input class='css-input' type='submit' name='submit' value='Go'></input>";
+    echo "</form></center>";
     
 }
 ?>

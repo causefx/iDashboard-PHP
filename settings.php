@@ -1,5 +1,18 @@
 <?php
-if((!isset($_COOKIE["logged"]))){
+
+try {
+    $config = parse_ini_file('settings.ini.php', true);
+} catch(Exception $e) {
+    die('<b>Unable to read config.ini.php. Did you rename it from settings.ini.php-example?</b><br><br>Error message: ' .$e->getMessage());
+}
+
+foreach ($config as $keyname => $section) {
+    
+    if(($keyname == "general")) {$cookiepass = $section["password"];}
+    
+}
+
+if($_COOKIE["logged"] !== $cookiepass){
     echo "<!DOCTYPE html>";
     echo "<head>";
     echo "<title>Form submitted</title>";
@@ -28,11 +41,7 @@ function write_ini_file($content, $path) {
 
 $configfile = 'settings.ini.php';
 
-try {
-    $config = parse_ini_file('settings.ini.php', true);
-} catch(Exception $e) {
-    die('<b>Unable to read config.ini.php. Did you rename it from settings.ini.php-example?</b><br><br>Error message: ' .$e->getMessage());
-}
+
 
 //Password crap
 if(array_key_exists('category-0', $_POST) == true){
@@ -42,7 +51,10 @@ if(array_key_exists('category-0', $_POST) == true){
     if(empty($_POST["password-0"])){ $_POST["password-0"] = $nopass;}
     if(strlen($_POST["password-0"]) < 50){ $_POST["password-0"] = crypt($_POST["password-0"], sprintf('$5$rounds=%d$%s$', $rounds, $salt)); }
     //password crap      
-
+    
+    //Cookies anyone?
+    setcookie("logged", $_POST["password-0"], time() + (86400 * 7), "/");
+    
     //Gather Config Write Info
     $sampleData .= '; <?php die("Access denied"); ?>' . "\r\n";
 
@@ -51,7 +63,7 @@ if(array_key_exists('category-0', $_POST) == true){
         if ($value == "on")
             $value = "true";
 
-    if($splitParameter[0] == "category"){ $sampleData .= "[" . $value . "]\r\n"; }else{ $sampleData .= $splitParameter[0] . " = \"" . $value . "\"\r\n"; }
+        if($splitParameter[0] == "category"){ $sampleData .= "[" . $value . "]\r\n"; }else{ $sampleData .= $splitParameter[0] . " = \"" . $value . "\"\r\n"; }
 
     }
 
@@ -83,10 +95,19 @@ if(array_key_exists('category-0', $_POST) == true){
         <link rel="stylesheet" href="css/font-awesome.min.css"/>
         <!-- Bootstrap-Iconpicker -->
         <link rel="stylesheet" href="css/bootstrap-iconpicker.min.css"/>
+        <!--test-->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-colorpicker.min.css" rel="stylesheet">
+        <!--end test-->
         
         <style>
             body {
-                margin: 50px;
+                margin: 10px;
+                background-color: #eee;
+            }
+            
+            .well {
+                background-color: white;
             }
 
             .fa {
@@ -113,7 +134,7 @@ if(array_key_exists('category-0', $_POST) == true){
                 line-height:30px;
                 background-repeat:no-repeat;
                 background-position: 0 0;
-                font-size:30px;
+                font-size:14px;
                 vertical-align:middle;
                 cursor:pointer;
             }
@@ -148,13 +169,43 @@ if(array_key_exists('category-0', $_POST) == true){
             <?php
             foreach ($config as $keyname => $section) {
                 if(($keyname == "general")) {
-                    echo "<div class=\"form-group clearfix\">";
+                    echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
                     echo "<input type=\"hidden\" name=\"category-0\" class=\"form-control\" value=\"general\">";
                     echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-cog\"></span></span> ";
-                    echo "<input type=\"text\" name=\"title-0\" class=\"form-control\" value=\"" . $section["title"] ."\"> ";
-                    echo "<input type=\"text\" name=\"password-0\" class=\"form-control\" placeholder=\"Leave Blank if no change\" value=\"\"> ";
+                    echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Title</div>";
+                    echo "<input style=\"margin-bottom: 0px\" type=\"text\" name=\"title-0\" class=\"form-control\" value=\"" . $section["title"] ."\"></div> ";
+                    echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Password</div>";
+                    echo "<input style=\"margin-bottom: 0px\" type=\"text\" name=\"password-0\" class=\"form-control\" placeholder=\"Leave Blank if no change\" value=\"\"></div> ";
                     if($section['useicons'] == "true"){echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\" checked> ";}else {echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\"> ";}
-                    echo "<label for=\"useicons-0\" class=\"css-label\">Icons</label></div><br/><hr/><br/> ";
+                    echo "<label for=\"useicons-0\" class=\"css-label\">Icons</label>  ";
+                    echo "</div>";
+                    echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px;\">";
+                    echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-paint-brush\"></span></span> ";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"tabcoloractive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabcoloractive\" name=\"tabcoloractive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabcoloractive"] ."\" class=\"form-control\"/>";
+                    echo "<span class=\"input-group-addon\"><i></i></span>";
+                    echo "</div>  ";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"fontcoloractive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Font</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcoloractive\" name=\"fontcoloractive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["fontcoloractive"] ."\" class=\"form-control\"/>";
+                    echo "<span class=\"input-group-addon\"><i></i></span>";
+                    echo "</div>  ";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"tabshadowactive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Shadow</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabshadowactive\" name=\"tabshadowactive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabshadowactive"] ."\" class=\"form-control\"/>";
+                    echo "<span class=\"input-group-addon\"><i></i></span>";
+                    echo "</div>  ";
+                    echo "<br><span class=\"btn btn-inactive disabled\" type=\"button\"><span class=\"fa fa-paint-brush\"></span></span> ";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"tabcolor\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabcolor\" name=\"tabcolor-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabcolor"] ."\" class=\"form-control\"/>";
+                    echo "<span class=\"input-group-addon\"><i></i></span>";
+                    echo "</div>  ";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"fontcolor\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Font</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcolor\" name=\"fontcolor-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["fontcolor"] ."\" class=\"form-control\"/>";
+                    echo "<span class=\"input-group-addon\"><i></i></span>";
+                    echo "</div> ";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"tabshadow\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Shadow</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcolor\" name=\"tabshadow-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabshadow"] ."\" class=\"form-control\"/>";
+                    echo "<span class=\"input-group-addon\"><i></i></span>";
+                    echo "</div></div> ";
                 }
             }
             ?>
@@ -168,17 +219,17 @@ if(array_key_exists('category-0', $_POST) == true){
                 if(($keyname !== "general")) {
                     ?>  
 
-                    <div class="form-group clearfix">
+                    <div class="form-group clearfix well well-sm" style="padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;">
                         <span class="btn btn-default move" type="button"><span class="fa fa-arrows"></span></span>
-                        <input type="text" name="category-<?=$i;?>" class="form-control" value="<?=$keyname;?>">
-                        <input type="text" name="url-<?=$i;?>" class="form-control" placeholder="url" value="<?=$section['url']?>">
+                        <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">Name</div><input style="margin-bottom: 0px" type="text" name="category-<?=$i;?>" class="form-control" value="<?=$keyname;?>"></div>
+                        <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">URL</div><input style="margin-bottom: 0px" type="text" name="url-<?=$i;?>" class="form-control" placeholder="url" value="<?=$section['url']?>"></div>
                         <button data-placement="left" data-cols="5" data-rows="5" class="btn btn-default" name="icon-<?=$i;?>" role="iconpicker" data-iconset="fontawesome" data-icon="<?=$section['icon']?>"></button>
                         <?php
                         if($section['enabled'] == "true"){echo '<input type="checkbox" name="enabled-' . $i .'" id="enabled-' . $keyname . '" class="css-checkbox" checked>';}else {echo '<input type="checkbox" name="enabled-' . $i .'" id="enabled-' . $keyname . '" class="css-checkbox">';}?>      
                         <label for="enabled-<?=$keyname;?>" class="css-label">Enabled</label> 
                         <?php
                         if($section['guest'] == "true"){echo '<input type="checkbox" name="guest-' . $i .'" id="guest-' . $keyname . '" class="css-checkbox" checked>';}else {echo '<input type="checkbox" name="guest-' . $i .'" id="guest-' . $keyname . '" class="css-checkbox">';}?>
-                        <label for="guest-<?=$keyname;?>" class="css-label">Guest</label> <button class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
+                        <label for="guest-<?=$keyname;?>" class="css-label">Guest</label> &nbsp;&nbsp;<button style="float: right;" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button>
                     </div>
 
                 <?php
@@ -198,6 +249,108 @@ if(array_key_exists('category-0', $_POST) == true){
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.3.min.js"></script>
 
+        <script>
+            $(function () {
+                $('#tabcoloractive').colorpicker({
+                    format: "hex",
+                    align: "left",
+                    colorSelectors: {
+                        '#777777': '#777777',
+                        '#337ab7': '#337ab7',
+                        '#5cb85c': '#5cb85c',
+                        '#5bc0de': '#5bc0de',
+                        '#f0ad4e': '#f0ad4e',
+                        '#d9534f': '#d9534f'
+                    }
+                });
+            });
+        </script>
+        
+        <script>
+            $(function () {
+                $('#fontcoloractive').colorpicker({
+                    format: "hex",
+                    align: "left",
+                    colorSelectors: {
+                        '#777777': '#777777',
+                        '#337ab7': '#337ab7',
+                        '#5cb85c': '#5cb85c',
+                        '#5bc0de': '#5bc0de',
+                        '#f0ad4e': '#f0ad4e',
+                        '#d9534f': '#d9534f'
+                    }
+                });
+            });
+        </script>
+        
+        <script>
+            $(function () {
+                $('#tabcolor').colorpicker({
+                    format: "hex",
+                    align: "left",
+                    colorSelectors: {
+                        '#777777': '#777777',
+                        '#337ab7': '#337ab7',
+                        '#5cb85c': '#5cb85c',
+                        '#5bc0de': '#5bc0de',
+                        '#f0ad4e': '#f0ad4e',
+                        '#d9534f': '#d9534f'
+                    }
+                });
+            });
+        </script>
+        
+        <script>
+            $(function () {
+                $('#fontcolor').colorpicker({
+                    format: "hex",
+                    align: "left",
+                    colorSelectors: {
+                        '#777777': '#777777',
+                        '#337ab7': '#337ab7',
+                        '#5cb85c': '#5cb85c',
+                        '#5bc0de': '#5bc0de',
+                        '#f0ad4e': '#f0ad4e',
+                        '#d9534f': '#d9534f'
+                    }
+                });
+            });
+        </script>
+        
+        <script>
+            $(function () {
+                $('#tabshadowactive').colorpicker({
+                    format: "hex",
+                    align: "left",
+                    colorSelectors: {
+                        '#777777': '#777777',
+                        '#337ab7': '#337ab7',
+                        '#5cb85c': '#5cb85c',
+                        '#5bc0de': '#5bc0de',
+                        '#f0ad4e': '#f0ad4e',
+                        '#d9534f': '#d9534f'
+                    }
+                });
+            });
+        </script>
+        
+        <script>
+            $(function () {
+                $('#tabshadow').colorpicker({
+                    format: "hex",
+                    align: "left",
+                    colorSelectors: {
+                        '#777777': '#777777',
+                        '#337ab7': '#337ab7',
+                        '#5cb85c': '#5cb85c',
+                        '#5bc0de': '#5bc0de',
+                        '#f0ad4e': '#f0ad4e',
+                        '#d9534f': '#d9534f'
+                    }
+                });
+            });
+        </script>
+        
         <script type='text/javascript'>
 
         $(function() {
@@ -205,7 +358,7 @@ if(array_key_exists('category-0', $_POST) == true){
             var i = <?=$i?>;
 
             $('#addScnt').on('click', function() {
-                $('<div class="form-group clearfix ui-sortable-handle"> <span class="btn btn-default move" type="button"><span class="fa fa-arrows"></span></span> <input type="text" name="category-' + i +'" class="form-control" placeholder="Tag" value="New Tab"> <input type="text" name="url-' + i +'" class="form-control" placeholder="url" value="Add URL"> <button class="btn btn-default" name="icon-' + i +'" role="iconpicker" data-iconset="fontawesome" data-icon="fa-question"></button> <input type="checkbox" name="enabled-' + i +'" id="enabled-' + i +'" class="css-checkbox"> <label for="enabled-' + i +'" class="css-label">Enabled</label> <input type="checkbox" name="guest-' + i +'" id="guest-' + i +'" class="css-checkbox"> <label for="guest-' + i +'" class="css-label">Guest</label> <button class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button></div>').appendTo(scntDiv);
+                $('<div class="form-group clearfix ui-sortable-handle well well-sm" style="padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;"> <span class="btn btn-default move" type="button"><span class="fa fa-arrows"></span></span> <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">Name</div><input style="margin-bottom: 0px" name="category-' + i +'" class="form-control" placeholder="Tag" value="New Tab"></div> <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">URL</div><input style="margin-bottom: 0px" type="text" name="url-' + i +'" class="form-control" placeholder="url" value="Add URL"></div> <button data-placement="left" data-cols="5" data-rows="5" class="btn btn-default iconpicker" name="icon-' + i +'" role="iconpicker" data-iconset="fontawesome" data-icon="fa-question"><i class="fa fa-play-circle-o"></i><input type="hidden" name="icon-' + i +'" value="fa-play-circle-o"><span class="caret"></span></button> <input type="checkbox" name="enabled-' + i +'" id="enabled-' + i +'" class="css-checkbox" checked> <label for="enabled-' + i +'" class="css-label">Enabled</label> <input type="checkbox" name="guest-' + i +'" id="guest-' + i +'" class="css-checkbox"> <label for="guest-' + i +'" class="css-label">Guest</label> <button style="float: right" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button></div>').appendTo(scntDiv);
                 i++;    
                 return false;
 
@@ -240,6 +393,8 @@ if(array_key_exists('category-0', $_POST) == true){
 
         <!-- Bootstrap-Iconpicker -->
         <script type="text/javascript" src="js/bootstrap-iconpicker.min.js"></script>
+                <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+        <script src="js/bootstrap-colorpicker.js"></script>
 
     </body>
     

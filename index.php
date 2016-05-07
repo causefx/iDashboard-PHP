@@ -19,14 +19,14 @@ foreach ($config as $keyname => $section) {
         }
     
         //Guest
-        if(!isset($_COOKIE["logged"]) && !empty($section["enabled"]) && ($section["enabled"]=="true") && !empty($section["guest"]) && ($section["guest"]=="true") ) {
+        if($_COOKIE["logged"] !== $cookiepass && !empty($section["enabled"]) && ($section["enabled"]=="true") && !empty($section["guest"]) && ($section["guest"]=="true") ) {
             if($icons == "active"){ $listicons = "<span><i class=\"fa ". $section["icon"] ."\"></i></span>"; }
             $loadedlist .= "<li id=\"". $section["url"] ."x\"><a>" . $keyname . " " . $listicons ."</a></li>\n";
             $loadedurls .= "<div class=\"z-nopadding\" data-content-url=\"". $section["url"] ."\" data-content-type=\"iframe\"></div>\n";
                             
         }
         //Full Access
-        if(isset($_COOKIE["logged"]) && !empty($section["enabled"]) && ($section["enabled"]=="true")) {
+        if($_COOKIE["logged"] == $cookiepass && !empty($section["enabled"]) && ($section["enabled"]=="true")) {
             if($icons == "active"){ $listicons = "<span><i class=\"fa ". $section["icon"] ."\"></i></span>"; }
             $loadedlist .= "<li id=\"". $section["url"] ."x\"><a>" . $keyname . " " . $listicons ."</a></li>\n";
             $loadedurls .= "<div class=\"z-nopadding\" data-content-url=\"". $section["url"] ."\" data-content-type=\"iframe\"></div>\n";
@@ -34,15 +34,15 @@ foreach ($config as $keyname => $section) {
         }
         //General
         if (empty($title)) $title = 'Manage My HTPC';
-        if(($keyname == "general")) { $title = $section["title"]; }
+        if(($keyname == "general")) { $title = $section["title"]; $tabcoloractive = $section["tabcoloractive"]; $fontcoloractive = $section["fontcoloractive"]; $tabcolor = $section["tabcolor"]; $fontcolor = $section["fontcolor"]; $tabshadowactive = $section["tabshadowactive"]; $tabshadow = $section["tabshadow"]; $cookiepass = $section["password"];}
 
 }
-if(!isset($_COOKIE["logged"])){
+if($_COOKIE["logged"] !== $cookiepass){
     $lasttablist .= "<li><a>Login" . $guesticons . "</a></li>\n";
     $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
 }
 
-if(isset($_COOKIE["logged"])){
+if($_COOKIE["logged"] == $cookiepass){
     $lasttablist .= "<li><a>Settings" . $adminicons . "</a></li>\n";
     $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
 }
@@ -66,6 +66,15 @@ if(!file_exists('settings.ini.php')){
         <script src="js/jquery.min.js"></script>
         <script src="js/tabs.min.js"></script>
         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+        <style>
+            .z-tabs.white.z-bordered > ul > li.z-active > a {color: <?=$fontcoloractive;?>; background-color: <?=$tabcoloractive;?>; text-shadow: 0 1px <?=$tabshadowactive;?>;}
+        </style>
+        <style>
+            .z-tabs.horizontal.responsive > ul > li > a, .z-tabs.horizontal.top-compact > ul > li > a, .z-tabs.horizontal.bottom-compact > ul > li > a, .z-tabs.horizontal.top-center > ul > li > a, .z-tabs.horizontal.bottom-center > ul > li > a {
+    color: <?=$fontcolor;?>; background-color: <?=$tabcolor;?>; text-shadow: 0 1px <?=$tabshadow;?>;
+}
+        </style>
+        
         <script>
 
             $(document).ready(function(){
@@ -76,11 +85,11 @@ if(!file_exists('settings.ini.php')){
                 });
             });
 
-</script>
+        </script>
     
     </head>
 
-    <body style="position: fixed; top: 0; right: 0; bottom: 0; left: 0;background: url(img/bg.jpg) no-repeat center center fixed; 
+    <body style="position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: white; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

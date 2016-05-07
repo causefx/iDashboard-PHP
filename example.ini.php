@@ -3,6 +3,12 @@
 title = "iCauseFX"
 password = "$5$rounds=10000$2lXstBi0yrcJd7vH$9SBM7jW1XAlS67mNpEKolliHvz57UPgPv65nJIBpgI2"
 useicons = "true"
+tabcoloractive = "#000000"
+fontcoloractive = "#ffffff"
+tabshadowactive = "#808080"
+tabcolor = "#ffffff"
+fontcolor = "#000000"
+tabshadow = "#c7c6c6"
 [Sonarr]
 url = "https://sonarr.tv/"
 icon = "fa-desktop"
