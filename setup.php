@@ -41,10 +41,7 @@ foreach ($config as $keyname => $section) {
 
 $pass = isset( $_POST["pass"] ) ? $_POST["pass"] : "none" ;
 
-$parts = explode('$', $hash_pass);
-$test_hash = crypt($pass, sprintf('$%s$%s$%s$', $parts[1], $parts[2], $parts[3]));
-
-if(($action == "write" && $hash_pass == $test_hash)){ 
+if(($action == "write" && password_verify($pass, $hash_pass))){ 
     setcookie("logged", $hash_pass, time() + (86400 * 7), "/");
     $error = "You got it dude!";
     echo "<!DOCTYPE html>";
@@ -55,7 +52,7 @@ if(($action == "write" && $hash_pass == $test_hash)){
     echo "<body></body></html>";
 }
 
-if(isset( $_POST["pass"] ) && ($hash_pass !== $test_hash)){
+if(isset( $_POST["pass"] ) && (!password_verify($pass, $hash_pass))){
     $error = "Wrong Password!";
 }
     
@@ -70,7 +67,7 @@ if($_COOKIE["logged"] == $hash_pass){
     
 }
 
-if($hash_pass !== $test_hash){
+if(!password_verify($pass, $hash_pass)){
 
     echo "<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>";
     echo "<center><B>Please Login to Contiune<br/><br/>";

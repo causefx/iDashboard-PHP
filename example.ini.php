@@ -1,9 +1,9 @@
 ; <?php die("Access denied"); ?>
 [general]
 title = "iCauseFX"
-password = "$5$rounds=10000$2lXstBi0yrcJd7vH$9SBM7jW1XAlS67mNpEKolliHvz57UPgPv65nJIBpgI2"
+password = "$2y$10$97IH4rsp6fb.p5KIFfjVH.xZuFtghq5h.cKV4VuKQPhZCQdmJzeMS"
 useicons = "true"
-tabcoloractive = "#000000"
+tabcoloractive = "#ffffff"
 fontcoloractive = "#F44343"
 tabshadowactive = "#808080"
 tabcolor = "#ffffff"

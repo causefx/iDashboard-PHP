@@ -46,10 +46,8 @@ $configfile = 'settings.ini.php';
 //Password crap
 if(array_key_exists('category-0', $_POST) == true){
     foreach ($config as $keyname => $section) { if(($keyname == "general")) { $nopass = $section["password"]; } }
-    $salt = substr(str_replace('+','.',base64_encode(md5(mt_rand(), true))),0,16);
-    $rounds = 10000;
     if(empty($_POST["password-0"])){ $_POST["password-0"] = $nopass;}
-    if(strlen($_POST["password-0"]) < 50){ $_POST["password-0"] = crypt($_POST["password-0"], sprintf('$5$rounds=%d$%s$', $rounds, $salt)); }
+    if(strlen($_POST["password-0"]) < 50){ $_POST["password-0"] = password_hash($_POST["password-0"], PASSWORD_DEFAULT); }
     //password crap      
     
     //Cookies anyone?
