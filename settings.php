@@ -25,6 +25,24 @@ if($_COOKIE["logged"] !== $cookiepass){
 
 if(isset($_GET["action"])){$action = $_GET["action"];}
 
+if($action == "logout"){
+    
+    if (isset($_COOKIE['logged'])) {
+        unset($_COOKIE['logged']);
+        setcookie('logged', '', time() - 3600, '/');
+        
+    }
+    
+    sleep(.5);
+    echo "<!DOCTYPE html>";
+    echo "<head>";
+    echo "<title>Logout</title>";
+    echo "<script type='text/javascript'>window.parent.location.reload();</script>";
+    echo "</head>";
+    echo "<body></body></html>";
+    
+}
+
 function write_ini_file($content, $path) { 
 
     if (!$handle = fopen($path, 'w')) { 
@@ -176,6 +194,7 @@ if(array_key_exists('category-0', $_POST) == true){
                     echo "<input style=\"margin-bottom: 0px\" type=\"password\" name=\"password-0\" class=\"form-control\" placeholder=\"Leave Blank if no change\" value=\"\"></div> ";
                     if($section['useicons'] == "true"){echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\" checked> ";}else {echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\"> ";}
                     echo "<label for=\"useicons-0\" class=\"css-label\">Icons</label>  ";
+                    echo "<a href=\"?action=logout\" class=\"btn btn-warning\" style=\"float: right;\" role=\"button\">Logout</a>";
                     echo "</div>";
                     echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px;\">";
                     echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-paint-brush\"></span></span> ";

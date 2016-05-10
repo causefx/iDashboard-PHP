@@ -11,11 +11,22 @@ foreach ($config as $keyname => $section) {
         if(!empty($section["useicons"]) && ($section["useicons"]=="true")){ 
             
             $icons = "active";
-            if($icons == "active"){ $px = "80px"; }else{ $px = "50px";}
             
             $guesticons = "<span><i class=\"fa fa-toggle-on\"></i></span>";
             $adminicons = "<span><i class=\"fa fa-toggle-on\"></i></span>";
             $refreshicons = "<span><i class=\"fa fa-refresh\"></i></span>";
+        }
+    
+        if($icons == "active"){
+                
+            $px = "80px";
+            $pxmobile = "-30px";
+                
+        }else{
+                
+            $px = "50px";
+            $pxmobile = "0px";
+                
         }
     
         //Guest
@@ -74,6 +85,14 @@ if(!file_exists('settings.ini.php')){
     color: <?=$fontcolor;?>; background-color: <?=$tabcolor;?>; text-shadow: 0 1px <?=$tabshadow;?>;
 }
         </style>
+        <style>.z-tabs.mobile {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: overlay;
+}</style>
         
         <script>
 
@@ -111,7 +130,11 @@ if(!file_exists('settings.ini.php')){
 
                 <!-- Content container -->
                 <style> .z-container { position: fixed; top: 50px; right: 0px; bottom: 0px; left: 0px; margin: 10px; } </style>
-                <div style="top: <?=$px;?>">              
+                <style> .z-tabs.mobile.top > .z-container {margin-top: <?=$pxmobile;?>;} </style>
+                <style> .z-video{overflow-x: hidden;overflow-y: auto;}</style>
+                <style> .z-content-inner{overflow-x: hidden;overflow-y: auto;;}</style>
+                <style> .z-nopadding.z-content{overflow-x: hidden;overflow-y: auto;}</style>
+                <div style="top: <?=$px;?>; overflow: overlay;">              
 
                     <?=$loadedurls;?>
                     <?=$lasttaburl;?>
