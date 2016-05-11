@@ -194,6 +194,8 @@ if(array_key_exists('category-0', $_POST) == true){
                     echo "<input style=\"margin-bottom: 0px\" type=\"password\" name=\"password-0\" class=\"form-control\" placeholder=\"Leave Blank if no change\" value=\"\"></div> ";
                     if($section['useicons'] == "true"){echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\" checked> ";}else {echo "<input type=\"checkbox\" name=\"useicons-0\" id=\"useicons-0\" class=\"css-checkbox\"> ";}
                     echo "<label for=\"useicons-0\" class=\"css-label\">Icons</label>  ";
+                    if($section['usemargins'] == "true"){echo "<input type=\"checkbox\" name=\"usemargins-0\" id=\"usemargins-0\" class=\"css-checkbox\" checked> ";}else {echo "<input type=\"checkbox\" name=\"usemargins-0\" id=\"usemargins-0\" class=\"css-checkbox\"> ";}
+                    echo "<label for=\"usemargins-0\" class=\"css-label\">Margins</label>  ";
                     echo "<a href=\"?action=logout\" class=\"btn btn-warning\" style=\"float: right;\" role=\"button\">Logout</a>";
                     echo "</div>";
                     echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px;\">";

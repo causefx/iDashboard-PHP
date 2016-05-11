@@ -17,6 +17,12 @@ foreach ($config as $keyname => $section) {
             $refreshicons = "<span><i class=\"fa fa-refresh\"></i></span>";
         }
     
+        if(!empty($section["usemargins"]) && ($section["usemargins"]=="true")){ 
+            
+            $margins = "active";
+
+        }
+    
         if($icons == "active"){
                 
             $px = "80px";
@@ -26,6 +32,18 @@ foreach ($config as $keyname => $section) {
                 
             $px = "50px";
             $pxmobile = "0px";
+                
+        }
+    
+        if($margins == "active"){
+                
+            $marginpx = "10px";
+            $marginborderpx = "1px";
+                
+        }else{
+                
+            $marginpx = "0px";
+            $marginborderpx = "0px";
                 
         }
     
@@ -116,7 +134,7 @@ if(!file_exists('settings.ini.php')){
 
         <span>&nbsp;</span>
 
-        <div id="page">
+        <div id="page" style="margin: <?=$marginpx;?>">
 
             <!--Tabs Start-->
             <div id="tabbed-nav">
@@ -129,12 +147,13 @@ if(!file_exists('settings.ini.php')){
                 </ul>
 
                 <!-- Content container -->
-                <style> .z-container { position: fixed; top: 50px; right: 0px; bottom: 0px; left: 0px; margin: 10px; } </style>
+                <style> .z-container { position: fixed; top: 50px; right: 0px; bottom: 0px; left: 0px; margin: <?=$marginpx;?>; } </style>
+                <style> .z-tabs .z-container{ margin: <?=$marginpx;?>; border-width: <?=$marginborderpx;?>; } </style>
                 <style> .z-tabs.mobile.top > .z-container {margin-top: <?=$pxmobile;?>;} </style>
                 <style> .z-video{overflow-x: hidden;overflow-y: auto;}</style>
-                <style> .z-content-inner{overflow-x: hidden;overflow-y: auto;;}</style>
-                <style> .z-nopadding.z-content{overflow-x: hidden;overflow-y: auto;}</style>
-                <div style="top: <?=$px;?>; overflow: overlay;">              
+                <!--<style> .z-content-inner{overflow: overlay;}</style>
+                <style> .z-nopadding.z-content{overflow-x: hidden;overflow-y: auto;}</style>-->
+                <div style="top: <?=$px;?>">              
 
                     <?=$loadedurls;?>
                     <?=$lasttaburl;?>

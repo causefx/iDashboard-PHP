@@ -3,6 +3,7 @@
 title = "iCauseFX"
 password = "$2y$10$97IH4rsp6fb.p5KIFfjVH.xZuFtghq5h.cKV4VuKQPhZCQdmJzeMS"
 useicons = "true"
+usemargins = "true"
 tabcoloractive = "#ffffff"
 fontcoloractive = "#F44343"
 tabshadowactive = "#808080"
