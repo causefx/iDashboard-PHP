@@ -25,12 +25,12 @@ foreach ($config as $keyname => $section) {
     
         if($icons == "active"){
                 
-            $px = "80px";
+            $px = "62px";//80
             $pxmobile = "-30px";
                 
         }else{
                 
-            $px = "50px";
+            $px = "34px";//50
             $pxmobile = "0px";
                 
         }
@@ -134,7 +134,7 @@ if(!file_exists('settings.ini.php')){
 
         <span>&nbsp;</span>
 
-        <div id="page" style="margin: <?=$marginpx;?>">
+        <div id="page" style="margin: <?=$marginpx;?>; position: absolute;">
 
             <!--Tabs Start-->
             <div id="tabbed-nav">
@@ -150,10 +150,10 @@ if(!file_exists('settings.ini.php')){
                 <style> .z-container { position: fixed; top: 50px; right: 0px; bottom: 0px; left: 0px; margin: <?=$marginpx;?>; } </style>
                 <style> .z-tabs .z-container{ margin: <?=$marginpx;?>; border-width: <?=$marginborderpx;?>; } </style>
                 <style> .z-tabs.mobile.top > .z-container {margin-top: <?=$pxmobile;?>;} </style>
-                <style> .z-video{overflow-x: hidden;overflow-y: auto;}</style>
+                <style> .z-video{position: absolute; height: 100%; width: 100%;-webkit-overflow-scrolling: touch; overflow: auto;}</style>
                 <!--<style> .z-content-inner{overflow: overlay;}</style>
                 <style> .z-nopadding.z-content{overflow-x: hidden;overflow-y: auto;}</style>-->
-                <div style="top: <?=$px;?>">              
+                <div style="top: <?=$px;?>;overflow: auto;">              
 
                     <?=$loadedurls;?>
                     <?=$lasttaburl;?>
@@ -173,11 +173,11 @@ if(!file_exists('settings.ini.php')){
                     multiline: true,
                     theme: "white",
                     position: "top-compact",
-                    size: "medium",
+                    size: "mini",
                     animation: {
                         easing: "easeInOutExpo",
                         duration: 450,
-                        effects: "fade"
+                        effects: "slideRight"
                     }
                 });
             });

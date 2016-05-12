@@ -73,7 +73,7 @@ if(!password_verify($pass, $hash_pass)){
     echo "<center><B>Please Login to Contiune<br/><br/>";
     echo $error . "<br/>";
     echo "<form action=\"?action=write\" method='POST'>";
-    echo "<div class=\"form-group clearfix well well-sm\" style=\"width: 25%; padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
+    echo "<div class=\"form-group clearfix well well-sm\" style=\"width: 300px; padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
     echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Password</div>";
     echo "<input style=\"margin-bottom: 0px\" type=\"password\" name=\"pass\" class=\"form-control\">";
     echo "<span class=\"input-group-btn\"><button name=\"submit\" class=\"btn btn-success\" type=\"submit\">Go!</button></span></div></div>";
