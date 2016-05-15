@@ -1,7 +1,5 @@
 <?php
 
-//ini_set('display_errors',1);  error_reporting(E_ALL);
-
 $configfile = 'settings.ini.php';
 $examplefile = 'example.ini.php';
 
