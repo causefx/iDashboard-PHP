@@ -43,6 +43,19 @@ if($action == "logout"){
     
 }
 
+if($action == "dontbugme"){
+
+    setcookie("dontbugme", "true", time() + (86400 * 365), "/");
+    sleep(.5);
+    echo "<!DOCTYPE html>";
+    echo "<head>";
+    echo "<title>Dont bug me scrub</title>";
+    echo "<script type='text/javascript'>window.location.replace('settings.php');</script>";
+    echo "</head>";
+    echo "<body></body></html>";
+    
+}
+
 function write_ini_file($content, $path) { 
 
     if (!$handle = fopen($path, 'w')) { 
@@ -188,10 +201,11 @@ if(array_key_exists('category-0', $_POST) == true){
 
         <form action="?action=write" method="post" name="adminForm" class="form-inline">
 
-            <div class="alert alert-warning">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Tip!</strong> Choose an option from above to change some settings.
-            </div>
+            <?php if($_COOKIE["dontbugme"] !== "true"){
+                echo "<div class=\"alert alert-warning\">";
+                echo "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>";
+                echo "<strong>Tip!</strong> Choose an option from below to change some settings. <strong><a href=\"?action=dontbugme\">Dont Remind Me Again!</a></strong></div>";
+            }?>
             
             <div class="btn-group btn-group-justified">
                 <div class="btn-group"><button data-toggle="collapse" data-target="#general" type="button" class="btn btn-primary">General</button></div>
