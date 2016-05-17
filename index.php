@@ -79,7 +79,7 @@ foreach ($config as $keyname => $section) {
         }
         //General
         if (empty($title)) $title = 'Manage My HTPC';
-        if(($keyname == "general")) { $title = $section["title"]; $tabcoloractive = $section["tabcoloractive"]; $fontcoloractive = $section["fontcoloractive"]; $tabcolor = $section["tabcolor"]; $fontcolor = $section["fontcolor"]; $tabshadowactive = $section["tabshadowactive"]; $tabshadow = $section["tabshadow"]; $cookiepass = $section["password"]; $bg = $section["bg"]; $tabborder  = $section["tabborder"];}
+        if(($keyname == "general")) { $title = $section["title"]; $tabcoloractive = $section["tabcoloractive"]; $fontcoloractive = $section["fontcoloractive"]; $tabcolor = $section["tabcolor"]; $fontcolor = $section["fontcolor"]; $tabshadowactive = $section["tabshadowactive"]; $tabshadow = $section["tabshadow"]; $cookiepass = $section["password"]; $bg = $section["bg"]; $tabborder  = $section["tabborder"]; $tabhighlight  = $section["tabhighlight"];}
 
 }
     if($_COOKIE["logged"] !== $cookiepass){
@@ -114,6 +114,7 @@ foreach ($config as $keyname => $section) {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="msapplication-tap-highlight" content="no" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/ico"/>
         <link href="css/min.css" rel="stylesheet" />
         <link href="css/tabs.min.css" rel="stylesheet" />
         <script src="js/jquery.min.js"></script>
@@ -129,7 +130,7 @@ foreach ($config as $keyname => $section) {
         </style>
         <style>.z-tabs.mobile {position: absolute;top: 0;bottom: 0;left: 0;right: 0;overflow: overlay;}</style>
         <style>.z-tabs.white > ul, .z-tabs.white > ul > li > a, .z-tabs.white > .z-container {border-color: <?=$tabborder;?>;}</style>
-        
+        <style>.z-tabs.horizontal.top.white.z-bordered > ul > li.z-active > a { border-top: 2px solid <?=$tabhighlight;?>; }</style>
         <script>
 
             $(document).ready(function(){
@@ -201,9 +202,6 @@ foreach ($config as $keyname => $section) {
                 });
             });
         </script>
-        <!--<script>
-            jQuery('iframe','#container').attr('src',url);
-        </script>-->
 
     </body>
     

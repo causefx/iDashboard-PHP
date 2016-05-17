@@ -121,6 +121,7 @@ if(array_key_exists('category-0', $_POST) == true){
         <meta name="mobile-web-app-capable" content="yes" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="msapplication-tap-highlight" content="no" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/ico"/>
         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>
         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
         <!-- Bootstrap -->
@@ -232,40 +233,53 @@ if(array_key_exists('category-0', $_POST) == true){
                     echo"<div id=\"color\" class=\"collapse\">";
                     echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px;\">";
                     echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-eyedropper\"></span></span> ";
-                    echo "<div style=\"margin-bottom: 8px\" id=\"bg\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Bg</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"bg\" name=\"bg-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["bg"] ."\" class=\"form-control\"/>";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"bg\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Bg&nbsp;</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"bgText\" name=\"bg-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["bg"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
                     echo "</div>  ";
                     echo "<div style=\"margin-bottom: 8px\" id=\"tabborder\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab Border</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"tabborder\" name=\"tabborder-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabborder"] ."\" class=\"form-control\"/>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabborderText\" name=\"tabborder-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabborder"] ."\" class=\"form-control\"/>";
+                    echo "<span class=\"input-group-addon\"><i></i></span>";
+                    echo "</div>  ";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"tabhighlight\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab Highlight</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabhighlightText\" name=\"tabhighlight-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabhighlight"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
                     echo "</div>  ";
                     echo "<br><span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-paint-brush\"></span></span> ";
                     echo "<div style=\"margin-bottom: 8px\" id=\"tabcoloractive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"tabcoloractive\" name=\"tabcoloractive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabcoloractive"] ."\" class=\"form-control\"/>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabcoloractiveText\" name=\"tabcoloractive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabcoloractive"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
                     echo "</div>  ";
-                    echo "<div style=\"margin-bottom: 8px\" id=\"fontcoloractive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Font</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcoloractive\" name=\"fontcoloractive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["fontcoloractive"] ."\" class=\"form-control\"/>";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"fontcoloractive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Font Color</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcoloractiveText\" name=\"fontcoloractive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["fontcoloractive"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
                     echo "</div>  ";
-                    echo "<div style=\"margin-bottom: 8px\" id=\"tabshadowactive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Shadow</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"tabshadowactive\" name=\"tabshadowactive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabshadowactive"] ."\" class=\"form-control\"/>";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"tabshadowactive\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab &nbsp;Shadow</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabshadowactiveText\" name=\"tabshadowactive-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabshadowactive"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
                     echo "</div>  ";
                     echo "<br><span class=\"btn btn-inactive disabled\" type=\"button\"><span class=\"fa fa-paint-brush\"></span></span> ";
                     echo "<div style=\"margin-bottom: 8px\" id=\"tabcolor\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"tabcolor\" name=\"tabcolor-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabcolor"] ."\" class=\"form-control\"/>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabcolorText\" name=\"tabcolor-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabcolor"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
                     echo "</div>  ";
-                    echo "<div style=\"margin-bottom: 8px\" id=\"fontcolor\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Font</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcolor\" name=\"fontcolor-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["fontcolor"] ."\" class=\"form-control\"/>";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"fontcolor\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Font Color</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcolorText\" name=\"fontcolor-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["fontcolor"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
                     echo "</div> ";
-                    echo "<div style=\"margin-bottom: 8px\" id=\"tabshadow\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Shadow</div>";
-                    echo "<input style=\"margin-bottom: 0px\" id=\"fontcolor\" name=\"tabshadow-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabshadow"] ."\" class=\"form-control\"/>";
+                    echo "<div style=\"margin-bottom: 8px\" id=\"tabshadow\" class=\"input-group colorpicker-component\"><div class=\"input-group-addon\">Tab &nbsp;Shadow</div>";
+                    echo "<input style=\"margin-bottom: 0px\" id=\"tabshadowText\" name=\"tabshadow-0\" type=\"text\" data-format=\"hex\" value=\"" . $section["tabshadow"] ."\" class=\"form-control\"/>";
                     echo "<span class=\"input-group-addon\"><i></i></span>";
-                    echo "</div></div></div> ";
+                    echo "</div></div> ";
+                    echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px;\">";
+                    echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-eye\"></span></span> ";
+                    echo "<button onclick=\"defaultTheme()\" class=\"btn btn-default\">Default</button> ";
+                    echo "<button onclick=\"Theme1()\" class=\"btn btn-info\">Theme 1</button> ";
+                    echo "<button onclick=\"Theme2()\" class=\"btn btn-success\">Theme 2</button> ";
+                    echo "<button onclick=\"Theme3()\" class=\"btn btn-warning\">Theme 3</button> ";
+                    echo "<button onclick=\"Theme4()\" class=\"btn btn-primary\">Theme 4</button> ";
+                    echo "<button onclick=\"Theme5()\" class=\"btn btn-danger\">Theme 5</button> ";
+                    echo "</div> </div>";
                 }
             }
             ?>
@@ -449,6 +463,23 @@ if(array_key_exists('category-0', $_POST) == true){
             });
         </script>
         
+        <script>
+            $(function () {
+                $('#tabhighlight').colorpicker({
+                    format: "hex",
+                    align: "left",
+                    colorSelectors: {
+                        '#777777': '#777777',
+                        '#337ab7': '#337ab7',
+                        '#5cb85c': '#5cb85c',
+                        '#5bc0de': '#5bc0de',
+                        '#f0ad4e': '#f0ad4e',
+                        '#d9534f': '#d9534f'
+                    }
+                });
+            });
+        </script>
+        
         <script type='text/javascript'>
 
         $(function() {
@@ -472,6 +503,84 @@ if(array_key_exists('category-0', $_POST) == true){
 
         });
 
+        </script>
+        <script>
+            function defaultTheme() {
+                document.getElementById("bgText").value = "#f2f2f2";
+                document.getElementById("tabborderText").value = "#cecece";
+                document.getElementById("tabhighlightText").value = "#f44343";
+                document.getElementById("tabcoloractiveText").value = "#ffffff";
+                document.getElementById("fontcoloractiveText").value = "#f44343";
+                document.getElementById("tabshadowactiveText").value = "#808080";
+                document.getElementById("tabcolorText").value = "#ffffff";
+                document.getElementById("fontcolorText").value = "#000000";
+                document.getElementById("tabshadowText").value = "#c7c6c6";
+            }
+        </script>
+        <script>
+            function Theme1() {
+                document.getElementById("bgText").value = "#d1d1d1";
+                document.getElementById("tabborderText").value = "#ffffff";
+                document.getElementById("tabhighlightText").value = "#5bc0de";
+                document.getElementById("tabcoloractiveText").value = "#ffffff";
+                document.getElementById("fontcoloractiveText").value = "#000000";
+                document.getElementById("tabshadowactiveText").value = "#777777";
+                document.getElementById("tabcolorText").value = "#5bc0de";
+                document.getElementById("fontcolorText").value = "#ffffff";
+                document.getElementById("tabshadowText").value = "#777777";
+            }
+        </script>
+        <script>
+            function Theme2() {
+                document.getElementById("bgText").value = "#d1d1d1";
+                document.getElementById("tabborderText").value = "#ffffff";
+                document.getElementById("tabhighlightText").value = "#5cb85c";
+                document.getElementById("tabcoloractiveText").value = "#ffffff";
+                document.getElementById("fontcoloractiveText").value = "#000000";
+                document.getElementById("tabshadowactiveText").value = "#777777";
+                document.getElementById("tabcolorText").value = "#5cb85c";
+                document.getElementById("fontcolorText").value = "#ffffff";
+                document.getElementById("tabshadowText").value = "#777777";
+            }
+        </script>
+        <script>
+            function Theme3() {
+                document.getElementById("bgText").value = "#d1d1d1";
+                document.getElementById("tabborderText").value = "#ffffff";
+                document.getElementById("tabhighlightText").value = "#f0ad4e";
+                document.getElementById("tabcoloractiveText").value = "#ffffff";
+                document.getElementById("fontcoloractiveText").value = "#000000";
+                document.getElementById("tabshadowactiveText").value = "#777777";
+                document.getElementById("tabcolorText").value = "#f0ad4e";
+                document.getElementById("fontcolorText").value = "#ffffff";
+                document.getElementById("tabshadowText").value = "#777777";
+            }
+        </script>
+        <script>
+            function Theme4() {
+                document.getElementById("bgText").value = "#d1d1d1";
+                document.getElementById("tabborderText").value = "#ffffff";
+                document.getElementById("tabhighlightText").value = "#337ab7";
+                document.getElementById("tabcoloractiveText").value = "#ffffff";
+                document.getElementById("fontcoloractiveText").value = "#000000";
+                document.getElementById("tabshadowactiveText").value = "#777777";
+                document.getElementById("tabcolorText").value = "#337ab7";
+                document.getElementById("fontcolorText").value = "#ffffff";
+                document.getElementById("tabshadowText").value = "#777777";
+            }
+        </script>
+        <script>
+            function Theme5() {
+                document.getElementById("bgText").value = "#d1d1d1";
+                document.getElementById("tabborderText").value = "#ffffff";
+                document.getElementById("tabhighlightText").value = "#d9534f";
+                document.getElementById("tabcoloractiveText").value = "#ffffff";
+                document.getElementById("fontcoloractiveText").value = "#000000";
+                document.getElementById("tabshadowactiveText").value = "#777777";
+                document.getElementById("tabcolorText").value = "#d9534f";
+                document.getElementById("fontcolorText").value = "#ffffff";
+                document.getElementById("tabshadowText").value = "#777777";
+            }
         </script>
 
         <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>          
