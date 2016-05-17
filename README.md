@@ -1,9 +1,9 @@
 # iDashboard-PHP
 HTPC Dashboard to load website services, written in PHP [Inspired by: [Managethis](https://github.com/Tenzinn3/Managethis) by [Tenzinn3](https://github.com/Tenzinn3)]
->Default Password is "iCauseFX"
+#Default Password is "iCauseFX"
 
 ## Setup
-**Requirements:** A webserver (nginx, Apache, IIS or any other webserver) configured with PHP5 support.
+**Requirements:** A webserver (nginx, Apache, IIS or any other webserver) configured with PHP5.5 support.
 `` parse_ini_file `` must be allowed in php.ini (default is allowed!)
 - To set it up, clone this repository:
 `` git clone https://github.com/causefx/iDashboard-PHP `` or download the ZIP-file.
@@ -14,7 +14,7 @@ Upload all contents of zip or git pull the zip into the folder you want to have 
 
 Open up the index.php file once everything is uploaded.  The script will install and copy the default template over.
 
-Now you can goto settings and change the tabs to whatever you like in whatever order and change your password.
+Now you can goto settings [Password is iCauseFX] and change the tabs to whatever you like in whatever order and change your password.
 
 Once the cookie expires you will need to login again
 
