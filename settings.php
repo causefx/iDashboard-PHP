@@ -1,9 +1,9 @@
 <?php
-
+error_reporting (E_ALL ^ E_NOTICE);
 try {
     $config = parse_ini_file('settings.ini.php', true);
 } catch(Exception $e) {
-    die('<b>Unable to read config.ini.php. Did you rename it from settings.ini.php-example?</b><br><br>Error message: ' .$e->getMessage());
+    die('<b>Unable to read config.ini.php. Did you rename it from example.ini.php?</b><br><br>Error message: ' .$e->getMessage());
 }
 
 foreach ($config as $keyname => $section) {
@@ -68,11 +68,7 @@ function write_ini_file($content, $path) {
     return $success; 
 }
 
-//ini_set('display_errors',1);  error_reporting(E_ALL);
-
 $configfile = 'settings.ini.php';
-
-
 
 //Password crap
 if(array_key_exists('category-0', $_POST) == true){
@@ -600,7 +596,7 @@ if(array_key_exists('category-0', $_POST) == true){
 
         <!-- Bootstrap-Iconpicker -->
         <script type="text/javascript" src="js/bootstrap-iconpicker.min.js"></script>
-                <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
         <script src="js/bootstrap-colorpicker.js"></script>
 
     </body>

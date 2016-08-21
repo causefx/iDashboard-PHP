@@ -1,5 +1,5 @@
 <?php
-
+error_reporting (E_ALL ^ E_NOTICE);
 try {
     $config = parse_ini_file('settings.ini.php', true);
 } catch(Exception $e) {

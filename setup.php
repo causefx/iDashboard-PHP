@@ -1,11 +1,11 @@
 <?php
-
+error_reporting (E_ALL ^ E_NOTICE);
 $configfile = 'settings.ini.php';
 $examplefile = 'example.ini.php';
 
 if(isset($_GET["action"])){$action = $_GET["action"];}
 
-if(!file_exists($filename) && !file_exists($examplefile)){
+if(!file_exists($configfile) && !file_exists($examplefile)){
     die('You are missing the ini configuration file, please download and refresh this page');
 }
 
@@ -28,7 +28,7 @@ if(!file_exists($configfile)){
 try {
     $config = parse_ini_file('settings.ini.php', true);
 } catch(Exception $e) {
-    die('<b>Unable to read config.ini.php. Did you rename it from settings.ini.php-example?</b><br><br>Error message: ' .$e->getMessage());
+    die('<b>Unable to read config.ini.php. Did you rename it from example.ini.php?</b><br><br>Error message: ' .$e->getMessage());
 }
 
 foreach ($config as $keyname => $section) {
@@ -67,8 +67,8 @@ if($_COOKIE["logged"] == $hash_pass){
 
 if(!password_verify($pass, $hash_pass)){
 
-    echo "<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>";
-    echo "<center><B>Please Login to Contiune<br/><br/>";
+    echo "<link rel='stylesheet prefetch' href='css/bootstrap.min.css'>";
+    echo "<center><B>Please Login to Continue<br/><br/>";
     echo $error . "<br/>";
     echo "<form action=\"?action=write\" method='POST'>";
     echo "<div class=\"form-group clearfix well well-sm\" style=\"width: 300px; padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
