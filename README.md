@@ -1,5 +1,6 @@
 # iDashboard-PHP
 HTPC Dashboard to load website services, written in PHP [Inspired by: [Managethis](https://github.com/Tenzinn3/Managethis) by [Tenzinn3](https://github.com/Tenzinn3)]
+![Desktop screenshot](https://fat.gfycat.com/PitifulGreenArieltoucan.gif)
 #Default Password is "iCauseFX"
 
 ## Setup
