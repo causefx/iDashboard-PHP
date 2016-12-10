@@ -1,19 +1,29 @@
 <?php
+
 error_reporting (E_ALL ^ E_NOTICE);
+
 $configfile = 'settings.ini.php';
+
 $examplefile = 'example.ini.php';
 
 if(isset($_GET["action"])){$action = $_GET["action"];}
 
 if(!file_exists($configfile) && !file_exists($examplefile)){
+
     die('You are missing the ini configuration file, please download and refresh this page');
+
 }
 
 if(!file_exists($configfile)){
+
     echo "The file $configfile does not exist, we will make a copy now...<br/><br/>";
+    
     if (!is_writable(dirname($examplefile)))
+    
         die('We don\'t have access to write to the current directory, please change the permissions to this directory.');
+    
     else {
+        
         copy($examplefile, $configfile);
         sleep(2);
         echo "<!DOCTYPE html>";
@@ -22,13 +32,19 @@ if(!file_exists($configfile)){
         echo "<script type='text/javascript'>window.parent.location.reload()</script>";
         echo "</head>";
         echo "<body></body></html>";
+    
     }
+
 }
 
 try {
+
     $config = parse_ini_file('settings.ini.php', true);
+
 } catch(Exception $e) {
-    die('<b>Unable to read config.ini.php. Did you rename it from example.ini.php?</b><br><br>Error message: ' .$e->getMessage());
+
+    die('<b>Unable to read settings.ini.php. Did you rename it from example.ini.php?</b><br><br>Error message: ' .$e->getMessage());
+
 }
 
 foreach ($config as $keyname => $section) {
@@ -40,6 +56,7 @@ foreach ($config as $keyname => $section) {
 $pass = isset( $_POST["pass"] ) ? $_POST["pass"] : "none" ;
 
 if(($action == "write" && password_verify($pass, $hash_pass))){ 
+    
     setcookie("logged", $hash_pass, time() + (86400 * 7), "/");
     $error = "You got it dude!";
     echo "<!DOCTYPE html>";
@@ -48,9 +65,12 @@ if(($action == "write" && password_verify($pass, $hash_pass))){
     echo "<script type='text/javascript'>window.parent.location.reload()</script>";
     echo "</head>";
     echo "<body></body></html>";
+    
 }
 
 if(isset( $_POST["pass"] ) && (!password_verify($pass, $hash_pass))){
+    
+    
     $error = "Wrong Password!";
 }
     
