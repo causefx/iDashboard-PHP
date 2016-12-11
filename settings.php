@@ -1,5 +1,7 @@
 <?php
+
 error_reporting (E_ALL ^ E_NOTICE);
+
 try {
     
     $config = parse_ini_file('settings.ini.php', true);
@@ -87,6 +89,8 @@ if(array_key_exists('category-0', $_POST) == true){
     setcookie("logged", $_POST["password-0"], time() + (86400 * 7), "/");
     
     $sampleData .= '; <?php die("Access denied"); ?>' . "\r\n";
+    
+    $getGroup = 0;
 
     foreach ($_POST as $parameter => $value) {
         
@@ -95,6 +99,16 @@ if(array_key_exists('category-0', $_POST) == true){
         if ($value == "on")
             $value = "true";
 
+        if($splitParameter[0] == "group"){
+            
+            if($value > $getGroup){
+                
+                $getGroup++;
+                
+            }
+            
+        }
+        
         if($splitParameter[0] == "category"){
             
             $sampleData .= "[" . $value . "]\r\n";
@@ -106,6 +120,10 @@ if(array_key_exists('category-0', $_POST) == true){
         }
 
     }
+    
+    //$sampleData .= "[groups]\r\n";
+    
+    $sampleData .= "groups = \"" . $getGroup . "\"\r\n";
 
     if($action == "write"){
         
@@ -309,13 +327,15 @@ if(array_key_exists('category-0', $_POST) == true){
             
             <div id="tabs" class="collapse">
                 
+                <div class="btn-group"><button data-toggle="collapse" data-target="#groupnames" type="button" class="btn btn-primary">Edit Group Names</button></div>
+                
                 <div id="tagsForm" class="sortable">
 
                     <?php $i = 0;
                     
                     foreach ($config as $keyname => $section) {
 
-                        if(($keyname !== "general")) {
+                        if(($keyname !== "general") && ($keyname !== "groups")) {
                             
                             if(!isset($section['group'])){
                                 
@@ -369,10 +389,65 @@ if(array_key_exists('category-0', $_POST) == true){
                         
                         $i++;
                         
-                    }
-                    
-                    $tabCount = $i;?>
+                    }?>
 
+                </div>
+                
+                <div id="groupnames" class="collapse">
+                    
+                    <input type="hidden" name="category-x" class="form-control" value="groups">
+                
+                    <?php 
+                    
+                    $alphabet = range('A', 'Z');
+
+                    //echo $alphabet[3]; // returns D
+                    //echo array_search('D', $alphabet); // returns 3
+                    
+                    foreach ($config as $keyname => $section) {
+
+                        if(($keyname == "groups")) {
+                    
+                            if($section['groups'] > count($section)){
+                                
+                                echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";                            
+                                
+                                foreach(range(1,$section['groups']) as $index) {
+                                    
+                                    echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-folder-open\"></span></span> ";
+                                    
+                                    echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Group-". $alphabet[$index - 1] . "</div>";
+                                    
+                                    echo "<input style=\"margin-bottom: 0px\" type=\"text\" name=\"group" . $alphabet[$index - 1] . "-xx\" class=\"form-control\" value=\"" . $section["title"] . "\"></div> <br>";
+
+                                }
+                                
+                                echo "</div>";
+                                
+                            }else{
+                                
+                                echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";                            
+                                
+                                foreach(range(1,$section['groups']) as $index) {
+                                    
+                                    $groupLetter = $alphabet[$index - 1];
+                                    
+                                    echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-folder-open\"></span></span> ";
+                                    
+                                    echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Group-" . $index . "</div>";
+                                    
+                                    echo "<input style=\"margin-bottom: 0px\" type=\"text\" name=\"group" . $groupLetter . "-xx\" class=\"form-control\" value=\"" . $section["group$groupLetter"] . "\"></div> <br>";
+
+                                }
+                                
+                                echo "</div>";
+                                
+                            }
+                            
+                        }
+    
+                    }?>
+                
                 </div>
 
                 <div class="form-group clearfix">
@@ -623,7 +698,7 @@ if(array_key_exists('category-0', $_POST) == true){
 
                 $('#addScnt').on('click', function() {
                     
-                    $('<div class="form-group clearfix ui-sortable-handle well well-sm" style="padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;"> <span class="btn btn-default move" type="button"><span class="fa fa-arrows"></span></span> <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">Name</div><input style="margin-bottom: 0px" name="category-' + i +'" class="form-control" placeholder="Tag" value="New Tab"></div> <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">URL</div><input style="margin-bottom: 0px" type="text" name="url-' + i +'" class="form-control" placeholder="url" value="Add URL"></div> <button data-placement="left" data-cols="5" data-rows="5" class="btn btn-default iconpicker" name="icon-' + i +'" role="iconpicker" data-iconset="fontawesome" data-icon="fa-question"><i class="fa fa-play-circle-o"></i><input type="hidden" name="icon-' + i +'" value="fa-play-circle-o"><span class="caret"></span></button> <input type="radio" name="default"> <label> Default</label><input type="checkbox" name="enabled-' + i +'" id="enabled-' + i +'" class="css-checkbox" checked> <label for="enabled-' + i +'" class="css-label">Enabled</label> <input type="checkbox" name="guest-' + i +'" id="guest-' + i +'" class="css-checkbox"> <label for="guest-' + i +'" class="css-label">Guest</label> <button style="float: right" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button></div>').appendTo(scntDiv);
+                    $('<div class="form-group clearfix ui-sortable-handle well well-sm" style="padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;"> <span class="btn btn-default move" type="button"><span class="fa fa-arrows"></span></span> <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">Name</div><input style="margin-bottom: 0px" name="category-' + i +'" class="form-control" placeholder="Tag" value="New Tab"></div> <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">URL</div><input style="margin-bottom: 0px" type="text" name="url-' + i +'" class="form-control" placeholder="url" value="Add URL"></div> <div style="margin-bottom: 8px" class="input-group"><div class="input-group-addon">Group</div><input style="margin-bottom: 0px; width: 35px" type="text" name="group-' + i +'" class="form-control" placeholder="1" value="1"></div> <button data-placement="left" data-cols="5" data-rows="5" class="btn btn-default iconpicker" name="icon-' + i +'" role="iconpicker" data-iconset="fontawesome" data-icon="fa-question"><i class="fa fa-play-circle-o"></i><input type="hidden" name="icon-' + i +'" value="fa-play-circle-o"><span class="caret"></span></button> <input type="radio" name="default"> <label> Default</label><input type="checkbox" name="enabled-' + i +'" id="enabled-' + i +'" class="css-checkbox" checked> <label for="enabled-' + i +'" class="css-label">Enabled</label> <input type="checkbox" name="guest-' + i +'" id="guest-' + i +'" class="css-checkbox"> <label for="guest-' + i +'" class="css-label">Guest</label> <button style="float: right" class="btn btn-danger deleteGroup" id="remScnt" type="button"><span class="fa fa-trash"></span></button></div>').appendTo(scntDiv);
                     i++;    
                     return false;
 
