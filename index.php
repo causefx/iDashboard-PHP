@@ -247,7 +247,22 @@ foreach ($config as $keyname => $section) {
         
         <meta name="msapplication-tap-highlight" content="no" />
         
-        <link rel="shortcut icon" href="favicon.ico" type="image/ico"/>
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="/fav/apple-touch-icon.png">
+        
+        <link rel="icon" type="image/png" href="/fav/favicon-32x32.png" sizes="32x32">
+        
+        <link rel="icon" type="image/png" href="/fav/favicon-16x16.png" sizes="16x16">
+        
+        <link rel="manifest" href="/fav/manifest.json">
+        
+        <link rel="mask-icon" href="/fav/safari-pinned-tab.svg" color="#369c15">
+        
+        <link rel="shortcut icon" href="/fav/favicon.ico">
+        
+        <meta name="msapplication-config" content="/fav/browserconfig.xml">
+        
+        <meta name="theme-color" content="#ffffff">
         
         <link href="css/min.css" rel="stylesheet" />
         
