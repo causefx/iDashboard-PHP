@@ -38,7 +38,7 @@
 
             <div>
 
-                <p>You can click Swap Group again to go the next Group or back to the pervious group id you only have 2 groups.</p>
+                <p>You can click Swap Group again to go the next Group or back to the pervious group if you only have 2 groups.</p>
 
                 <p>&mdash; CauseFX</p>
 

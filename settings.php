@@ -12,9 +12,60 @@ try {
 
 }
 
+function githubVersion (){
+    
+    $html = "https://github.com/causefx/iDashboard-PHP/releases/latest";
+    
+    $doc = new DOMDocument();
+    
+    $doc->loadHTMLFile($html);
+    
+    $xpath = new DomXpath($doc);
+
+    $version = $xpath->query('//span[@class="css-truncate-target"]')->item(0)->nodeValue;
+    
+    if(!isset($version)){
+
+        $version = "null";
+    }
+    
+    return $version;
+        
+}
+
+$githubVersion = githubVersion();
+
 foreach ($config as $keyname => $section) {
     
-    if(($keyname == "general")) {$cookiepass = $section["password"];}
+    if(($keyname == "general")) {
+        
+        $cookiepass = $section["password"];
+    
+        $currentVersion = $section["version"];
+        
+        $backgroundColor = $section["tabcolor"];
+    
+    }
+    
+}
+
+if($currentVersion == $githubVersion){
+    
+    $versionText = "You're Up-To-Date!";
+    $versionIcon = "check";
+    $versionColor = "#5cb85c";
+    
+}elseif($githubVersion == "null"){
+    
+    $versionText = "Failed to check for update!";
+    $versionIcon = "question";
+    $versionColor = "#f0ad4e";
+    
+}elseif($currentVersion < $githubVersion){
+    
+    $versionText = "New Version is out <a href=\"https://github.com/causefx/iDashboard-PHP/archive/master.zip\"> Download Here</a>";
+    $versionIcon = "times";
+    $versionColor = "#d9534f";
     
 }
 
@@ -170,7 +221,7 @@ if(array_key_exists('category-0', $_POST) == true){
             
             body {
                 margin: 10px;
-                background-color: #eee;
+                background-color: <?=$backgroundColor;?>;
             }
             
             .well {
@@ -257,9 +308,11 @@ if(array_key_exists('category-0', $_POST) == true){
             
                 if(($keyname == "general")) {
                     
-                    echo"<div id=\"general\" class=\"collapse\">";
+                    echo "<div id=\"general\" class=\"collapse\">";
+                    echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px; background-color: $versionColor\"><span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-$versionIcon\"></span></span> Current Version:[<strong>$currentVersion</strong>] - GitHub Version: [<strong>" . $githubVersion . "</strong>] - <strong>$versionText</strong></div>  <br>";
                     echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
                     echo "<input type=\"hidden\" name=\"category-0\" class=\"form-control\" value=\"general\">";
+                    echo "<input type=\"hidden\" name=\"version-0\" class=\"form-control\" value=\"1.00\">";
                     echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-cog\"></span></span> ";
                     echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Title</div>";
                     echo "<input style=\"margin-bottom: 0px\" type=\"text\" name=\"title-0\" class=\"form-control\" value=\"" . $section["title"] ."\"></div> ";

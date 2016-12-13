@@ -194,37 +194,38 @@ foreach ($config as $keyname => $section) {
     }
 
 }
-    if($_COOKIE["logged"] !== $cookiepass){
-        $lasttablist .= "<li><a>Login" . $guesticons . "</a></li>\n";
+
+if($_COOKIE["logged"] !== $cookiepass){
+    $lasttablist .= "<li><a>Login" . $guesticons . "</a></li>\n";
+    $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
+    $defaulttab = $defaulttabguest;
+}
+
+if($_COOKIE["logged"] == $cookiepass){
+
+    if($groupCount > 1){
+
+        $lasttablist .= "<li class=\"donthide\"><a>Settings" . $adminicons . "</a></li><li class=\"donthide\"><a class=\"swapGroup\">Swap Group" . $swapicons . "</a></li>\n";
         $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
-        $defaulttab = $defaulttabguest;
+        $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"swap.php\" data-content-type=\"iframe\"></div>\n";
+
+    }elseif(!isset($groupCount) || $groupCount == 1){
+
+        $lasttablist .= "<li class=\"donthide\"><a>Settings" . $adminicons . "</a></li>\n";
+        $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
+
     }
 
-    if($_COOKIE["logged"] == $cookiepass){
-        
-        if($groupCount > 1){
-            
-            $lasttablist .= "<li class=\"donthide\"><a>Settings" . $adminicons . "</a></li><li class=\"donthide\"><a class=\"swapGroup\">Swap Group" . $swapicons . "</a></li>\n";
-            $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
-            $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"swap.php\" data-content-type=\"iframe\"></div>\n";
-            
-        }elseif(!isset($groupCount) || $groupCount == 1){
-            
-            $lasttablist .= "<li class=\"donthide\"><a>Settings" . $adminicons . "</a></li>\n";
-            $lasttaburl .= "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
-            
-        }
-        
-        
-        $defaulttab = $defaulttabuser;
-    }
 
-    if(!file_exists('settings.ini.php')){
-        $lasttablist = "<li><a>Setup<span><i class=\"fa fa-spinner\"></i></span></a></li>\n";
-        $lasttaburl = "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
-    }
+    $defaulttab = $defaulttabuser;
+}
 
-    if(empty($defaulttab)){ $defaulttab = "tab1";}
+if(!file_exists('settings.ini.php')){
+    $lasttablist = "<li><a>Setup<span><i class=\"fa fa-spinner\"></i></span></a></li>\n";
+    $lasttaburl = "<div class=\"z-nopadding\" data-content-url=\"setup.php\" data-content-type=\"iframe\"></div>\n";
+}
+
+if(empty($defaulttab)){ $defaulttab = "tab1";}
 
 ?>
 
@@ -445,7 +446,7 @@ foreach ($config as $keyname => $section) {
         
         <script>           
 
-            $(window).load(function(){
+            $(window).ready(function(){
             
                 var countTabs = $("ul").find(".1, .donthide").length;
 
