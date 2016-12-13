@@ -35,13 +35,13 @@ function githubVersion (){
 
 $githubVersion = githubVersion();
 
+$currentVersion = "1.06";
+
 foreach ($config as $keyname => $section) {
     
     if(($keyname == "general")) {
         
         $cookiepass = $section["password"];
-    
-        $currentVersion = $section["version"];
         
         $backgroundColor = $section["tabcolor"];
     
@@ -312,7 +312,7 @@ if(array_key_exists('category-0', $_POST) == true){
                     echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px; background-color: $versionColor\"><span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-$versionIcon\"></span></span> Current Version:[<strong>$currentVersion</strong>] - GitHub Version: [<strong>" . $githubVersion . "</strong>] - <strong>$versionText</strong></div>  <br>";
                     echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
                     echo "<input type=\"hidden\" name=\"category-0\" class=\"form-control\" value=\"general\">";
-                    echo "<input type=\"hidden\" name=\"version-0\" class=\"form-control\" value=\"1.00\">";
+                    echo "<input type=\"hidden\" name=\"version-0\" class=\"form-control\" value=\"$currentVersion\">";
                     echo "<span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-cog\"></span></span> ";
                     echo "<div style=\"margin-bottom: 8px\" class=\"input-group\"><div class=\"input-group-addon\">Title</div>";
                     echo "<input style=\"margin-bottom: 0px\" type=\"text\" name=\"title-0\" class=\"form-control\" value=\"" . $section["title"] ."\"></div> ";
