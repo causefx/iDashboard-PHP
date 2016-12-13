@@ -444,6 +444,8 @@ if(empty($defaulttab)){ $defaulttab = "tab1";}
         
         </script>
         
+        <?php if(isset($groupCount)): ?>
+        
         <script>           
 
             $(window).ready(function(){
@@ -457,6 +459,8 @@ if(empty($defaulttab)){ $defaulttab = "tab1";}
             });
 
         </script>
+        
+        <?php endif;?>
 
     </body>
     
