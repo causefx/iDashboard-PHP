@@ -15,13 +15,13 @@
 
         <style type="text/css">
 
-            body { text-align: center; padding: 150px; }
+            body { text-align: center; padding: 25px; }
 
             h1 { font-size: 40px; }
 
             body { font: 20px Helvetica, sans-serif; color: #333; }
 
-            #article { display: block; text-align: left; width: 650px; margin: 0 auto; }
+            #article { display: block; text-align: left; width: 300px; margin: 0 auto; }
 
             a { color: #dc8100; text-decoration: none; }
 
@@ -34,15 +34,19 @@
     <body>
         <div id="article">
 
-            <h1>Choose a Tab to view it's page.</h1>
+            <center>
+                
+                <h1>Choose a Tab to view it's page.</h1>
 
-            <div>
+                <div>
 
-                <p>You can click Swap Group again to go the next Group or back to the pervious group if you only have 2 groups.</p>
+                    <p>You can click Swap Group again to go the next Group or back to the pervious group if you only have 2 groups.</p>
 
-                <p>&mdash; CauseFX</p>
+                    <p>&mdash; CauseFX</p>
 
-            </div>
+                </div>
+                
+            </center>
 
         </div>
 

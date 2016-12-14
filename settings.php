@@ -35,7 +35,7 @@ function githubVersion (){
 
 $githubVersion = githubVersion();
 
-$currentVersion = "1.06";
+$currentVersion = "1.07";
 
 foreach ($config as $keyname => $section) {
     

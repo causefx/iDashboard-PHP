@@ -408,7 +408,7 @@ if(empty($defaulttab)){ $defaulttab = "tab1";}
         
         <script>
         
-            $('.swapGroup').click(function(){
+            $('.swapGroup').on('click touchstart', function(){
             
                 if (typeof sessionStorage.getItem("currentGroup") === 'undefined' || sessionStorage.getItem("currentGroup") === null) {
 
@@ -432,11 +432,15 @@ if(empty($defaulttab)){ $defaulttab = "tab1";}
 
                 $("#grouping li").not('.' + currentGroup + ', .donthide').hide();
                 
-                var countTabs = $("ul").find("." + currentGroup + ", .donthide").length;
+                if($(window).width() > 737){
                 
-                var countTabsPercent = 100 / countTabs + '%';
-                
-                $("ul").find("." + currentGroup + ", .donthide").css({"width": countTabsPercent});
+                    var countTabs = $("ul").find("." + currentGroup + ", .donthide").length;
+
+                    var countTabsPercent = 100 / countTabs + '%';
+
+                    $("ul").find("." + currentGroup + ", .donthide").css({"width": countTabsPercent});
+                    
+                }
 
                 sessionStorage.currentGroup = currentGroup
 
@@ -449,14 +453,32 @@ if(empty($defaulttab)){ $defaulttab = "tab1";}
         <script>           
 
             $(window).ready(function(){
+                
+                if($(window).width() > 737){
             
-                var countTabs = $("ul").find(".1, .donthide").length;
+                    var countTabs = $("ul").find(".1, .donthide").length;
 
-                var countTabsPercent = 100 / countTabs + '%';
+                    var countTabsPercent = 100 / countTabs + '%';
 
-                $("ul").find(".1, .donthide").css({"width": countTabsPercent});
+                    $("ul").find(".1, .donthide").css({"width": countTabsPercent});
+                    
+                }
                 
             });
+            
+            $(document).ready(function(){
+                
+                $(window).resize(function(){
+                
+                    var countTabs = $("ul").find(".1, .donthide").length;
+
+                    var countTabsPercent = 100 / countTabs + '%';
+
+                    $("ul").find(".1, .donthide").css({"width": countTabsPercent});
+                    
+                });
+                
+            }); 
 
         </script>
         
