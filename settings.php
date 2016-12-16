@@ -12,30 +12,31 @@ try {
 
 }
 
-function githubVersion (){
+$html = "https://github.com/causefx/iDashboard-PHP/releases/latest";
     
-    $html = "https://github.com/causefx/iDashboard-PHP/releases/latest";
-    
-    $doc = new DOMDocument();
-    
-    $doc->loadHTMLFile($html);
-    
-    $xpath = new DomXpath($doc);
+$doc = new DOMDocument();
 
-    $version = $xpath->query('//span[@class="css-truncate-target"]')->item(0)->nodeValue;
-    
-    if(!isset($version)){
+$doc->loadHTMLFile($html);
 
-        $version = "null";
-    }
-    
-    return $version;
-        
+$xpath = new DomXpath($doc);
+
+$githubChanges = $xpath->query('//div[@class="markdown-body"]//p')->item(0)->nodeValue;
+
+$githubVersion = $xpath->query('//span[@class="css-truncate-target"]')->item(0)->nodeValue;
+
+if(!isset($githubVersion)){
+
+    $githubVersion = "null";
+
 }
 
-$githubVersion = githubVersion();
+if(!isset($githubChanges)){
 
-$currentVersion = "1.07";
+    $githubChanges = "null";
+
+}
+
+$currentVersion = "1.08";
 
 foreach ($config as $keyname => $section) {
     
@@ -63,7 +64,7 @@ if($currentVersion == $githubVersion){
     
 }elseif($currentVersion < $githubVersion){
     
-    $versionText = "New Version is out <a href=\"https://github.com/causefx/iDashboard-PHP/archive/master.zip\"> Download Here</a>";
+    $versionText = "New Version is out <a class=\"btn btn-success btn-sm\" href=\"https://github.com/causefx/iDashboard-PHP/archive/master.zip\" role=\"button\">Download Now</a> <button type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#changes\">View Changes</button>";
     $versionIcon = "times";
     $versionColor = "#d9534f";
     
@@ -514,6 +515,43 @@ if(array_key_exists('category-0', $_POST) == true){
             </div>
 
         </form>
+        
+        <div class="modal fade" id="changes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            
+            <div class="modal-dialog" role="document">
+            
+                <div class="modal-content">
+                
+                    <div class="modal-header">
+                    
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        
+                            <span aria-hidden="true">×</span>
+                        
+                        </button>
+                        
+                        <h4 class="modal-title" id="myModalLabel">New Changes/Fixes</h4>
+                        
+                    </div>
+                        
+                    <div class="modal-body">
+                    
+                        <?=$githubChanges;?>
+                    
+                    </div>
+                        
+                    <div class="modal-footer">
+                    
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.3.min.js"></script>
 

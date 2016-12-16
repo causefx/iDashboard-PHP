@@ -400,6 +400,30 @@ if(empty($defaulttab)){ $defaulttab = "tab1";}
                     
                 });
                 
+                <?php if(!isset($groupCount)): ?>
+                
+                $(window).resize(function () {
+                    
+                    if (/*_base.lastWindowHeight !== $(window).height() ||*/ _base.lastWindowWidth !== $(window).width()) {
+                        
+                        clearInterval(_base.resizeWindowIntervalId);
+                        
+                        _base.resizeWindowIntervalId = setTimeout(function () {
+                            
+                            _base.lastWindowHeight = $(window).height();
+                            
+                            _base.lastWindowWidth = $(window).width();
+                            
+                            
+                            methods.checkWidth(_base);
+                        
+                        }, _base.settings.responsiveDelay);
+                    }
+                    
+                });
+                
+                <?php endif;?>
+                
             });
             
 
