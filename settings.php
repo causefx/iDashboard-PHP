@@ -36,7 +36,7 @@ if(!isset($githubChanges)){
 
 }
 
-$currentVersion = "1.08";
+$currentVersion = "1.081";
 
 foreach ($config as $keyname => $section) {
     
@@ -52,21 +52,21 @@ foreach ($config as $keyname => $section) {
 
 if($currentVersion == $githubVersion){
     
-    $versionText = "You're Up-To-Date!";
-    $versionIcon = "check";
-    $versionColor = "#5cb85c";
+    $alertColor = "info";
+    $alertTitle = "Up-To-Date!";
+    $alertText = "Nice, no worries here, you're on the current version :)";
     
 }elseif($githubVersion == "null"){
     
-    $versionText = "Failed to check for update!";
-    $versionIcon = "question";
-    $versionColor = "#f0ad4e";
+    $alertColor = "warning";
+    $alertTitle = "Can't Get GitHub Version!";
+    $alertText = "The Dashboard Failed to check for update! We need to have php-xml enabled.";
     
 }elseif($currentVersion < $githubVersion){
     
-    $versionText = "New Version is out <a class=\"btn btn-success btn-sm\" href=\"https://github.com/causefx/iDashboard-PHP/archive/master.zip\" role=\"button\">Download Now</a> <button type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#changes\">View Changes</button>";
-    $versionIcon = "times";
-    $versionColor = "#d9534f";
+    $alertColor = "success";
+    $alertTitle = "New Version Is Out!";
+    $alertText = "Looks like it's time to update the dashboard. <a class=\"btn btn-success btn-sm\" href=\"https://github.com/causefx/iDashboard-PHP/archive/master.zip\" role=\"button\">Download Now</a> <button type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#changes\">View Changes</button>";
     
 }
 
@@ -283,7 +283,19 @@ if(array_key_exists('category-0', $_POST) == true){
         
     </head>
         
-    <body> 
+    <body>
+        
+        <div class="alert alert-<?=$alertColor;?> alert-dismissible fade in" role="alert">
+            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        
+                <span aria-hidden="true">&times;</span>
+        
+            </button>
+        
+            <strong><?=$alertTitle;?></strong> <?=$alertText;?>
+        
+        </div>
 
         <form action="?action=write" method="post" name="adminForm" class="form-inline">
 
@@ -310,7 +322,7 @@ if(array_key_exists('category-0', $_POST) == true){
                 if(($keyname == "general")) {
                     
                     echo "<div id=\"general\" class=\"collapse\">";
-                    echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px; background-color: $versionColor\"><span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-$versionIcon\"></span></span> Current Version:[<strong>$currentVersion</strong>] - GitHub Version: [<strong>" . $githubVersion . "</strong>] - <strong>$versionText</strong></div>  <br>";
+                    echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px;p adding-top: 10px; margin-bottom: 5px; background-color: $versionColor\"><span class=\"btn btn-inactive \" type=\"button\"><span class=\"fa fa-server\"></span></span> Current Version:[<strong>$currentVersion</strong>] - GitHub Version: [<strong>" . $githubVersion . "</strong>]</div>  <br>";
                     echo "<div class=\"form-group clearfix well well-sm\" style=\"padding-bottom: 0px; padding-top: 10px; margin-bottom: 5px;\">";
                     echo "<input type=\"hidden\" name=\"category-0\" class=\"form-control\" value=\"general\">";
                     echo "<input type=\"hidden\" name=\"version-0\" class=\"form-control\" value=\"$currentVersion\">";
