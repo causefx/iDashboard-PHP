@@ -16,7 +16,11 @@ $html = "https://github.com/causefx/iDashboard-PHP/releases/latest";
     
 $doc = new DOMDocument();
 
+libxml_use_internal_errors(true);
+
 $doc->loadHTMLFile($html);
+
+libxml_use_internal_errors(false);
 
 $xpath = new DomXpath($doc);
 
@@ -36,7 +40,7 @@ if(!isset($githubChanges)){
 
 }
 
-$currentVersion = "1.081";
+$currentVersion = "1.082";
 
 foreach ($config as $keyname => $section) {
     
