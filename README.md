@@ -3,7 +3,7 @@
 
 HTPC Dashboard to load website services, written in PHP [Inspired by: [Managethis](https://github.com/Tenzinn3/Managethis) by [Tenzinn3](https://github.com/Tenzinn3)]
 ![Desktop screenshot](https://fat.gfycat.com/PitifulGreenArieltoucan.gif)
-#Default Password is "iCauseFX"
+# Default Password is "iCauseFX"
 
 ## Setup
 **Requirements:** A webserver (nginx, Apache, IIS or any other webserver) configured with PHP5.5 support.
@@ -12,7 +12,7 @@ HTPC Dashboard to load website services, written in PHP [Inspired by: [Managethi
 `` git clone https://github.com/causefx/iDashboard-PHP `` or download the ZIP-file.
 - Place all files on a publically accessible webserver, either directly in the root, or inside a directory called ``Dashboard`` or whatever you want it to be called.  Please set the correct user permissions on the directory and it's files.
 
-##INSTRUCTIONS
+## INSTRUCTIONS
 Upload all contents of zip or git pull the zip into the folder you want to have this on your webserver.  Set the correct file permission on the files.
 
 Open up the index.php file once everything is uploaded.  The script will install and copy the default template over.
@@ -23,10 +23,10 @@ Once the cookie expires you will need to login again
 
 If you aren't logged in you or any guest will only see your guest enabled tabs
 
-##Thank you to those who helped test... especially
+## Thank you to those who helped test... especially
 [Thank you: [Codehhh](https://github.com/Codehhh) by [Mmolitor87](https://github.com/mmolitor87)]
 
-##Images
+## Images
 
 Guest View
 ![Desktop screenshot](http://i.imgur.com/KwEO6rp.png)
